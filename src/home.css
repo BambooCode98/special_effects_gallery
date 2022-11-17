@@ -1,0 +1,127 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+
+}
+
+html,body {
+  /* background-repeat: no-repeat; */
+  /* background-attachment: fixed; */
+  /* background-image: linear-gradient(#000000,#252525); */
+  background-color: black;
+  width: 100vw;
+  overflow: none;
+}
+
+.videoWrap{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.videoWrap::before,.videoWrap::after{
+  position: absolute;
+  width: 100%;
+  height: 100px;
+  content: "";
+}
+
+.videoWrap::before{
+  background: url('./svg/wave-top.svg');
+  top: 80%;
+}
+
+.videoWrap::after{
+  background: url('./svg/wave-bottom.svg');
+  bottom: 0%;
+  top: 100%;
+}
+
+.confetti{
+  object-fit: cover;
+  width: 100vw;
+  user-select: none;
+  /* position: relative; */
+}
+
+.heroTcontainer{
+  position: absolute;
+  top: 20%;
+  /* top: -200px; */
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border: red 1px solid; */
+  z-index: 5;
+  gap: 10px;
+  flex-direction: column;
+}
+
+.heroTitle{
+  font-size: 1.5em;
+  color: white;
+  text-align: center;
+  z-index: 5;
+  border-bottom: 1px solid white;
+}
+
+.heroSub{
+  color: white;
+  font-size: 1em;
+  text-align: center;
+
+}
+
+.galleryContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* gap: 5px; */
+}
+
+.images{
+  /* width: fit-content; */
+}
+
+.card{
+  box-shadow: 2px 1px 10px white;
+  border-radius: 2px;
+  /* border: 1px solid black; */
+}
+
+.title{
+  background-color: rgba(255,255,255,0.8);
+  font-size: 1.2em;
+  /* padding-left: 5px; */
+  padding: 5px;
+  border-bottom: black 1px solid;
+  /* border-radius: 5px; */
+}
+
+.desc{
+  background-color: rgba(255,255,255,0.8);
+  /* font-size: 0.9em; */
+  padding: 5px;
+  /* border-radius: 5px; */
+  /* border-bottom: 1px solid white; */
+  
+}
+
+.footer{
+  /* height: 50px; */
+  position: absolute;
+  width: 100vw;
+  /* background-color: white; */
+  /* z-index: 10; */
+  padding: 5px;
+  text-align: center;
+  height: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  border-top: white 1px solid;
+}
