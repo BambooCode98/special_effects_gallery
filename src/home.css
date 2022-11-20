@@ -74,6 +74,10 @@ html,body {
 
 }
 
+/* .mainArea{
+  height: 1500px;
+} */
+
 .galleryContainer{
   display: flex;
   flex-direction: column;
@@ -90,6 +94,14 @@ html,body {
   box-shadow: 2px 1px 10px white;
   border-radius: 2px;
   /* border: 1px solid black; */
+  height: 250px;
+  width: 250px;
+  position: absolute;
+  color: black;
+  background-size: cover;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  cursor: pointer;
 }
 
 .title{
@@ -124,4 +136,11 @@ html,body {
   align-items: center;
   color: white;
   border-top: white 1px solid;
+  bottom: -100%;
+}
+
+
+.canvas{
+  height: 100vh;
+  width: 100vw;
 }

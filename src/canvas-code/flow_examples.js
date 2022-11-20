@@ -3,9 +3,9 @@
 export default function practice1() {
   // example 1
   //code modified from _______
-  let can = document.createElement('canvas');
-  // let canvas = document.querySelector(".canvas"),
-  let canvas = can,
+  // let can = document.createElement('canvas');
+  let canvas = document.querySelector(".canvas"),
+  // let canvas = can,
   ctx = canvas.getContext("2d"),
   width = canvas.width = window.innerWidth,
   height = canvas.height = window.innerHeight,
