@@ -17,6 +17,8 @@ const root = document.querySelector('#root');
 
 let numArray = [];
 let tiles = [];
+let h = tiles[0];
+
 let canvasCodePage = [];
 let heightPos = window.innerHeight;
 let footerPos;
@@ -46,17 +48,15 @@ window.addEventListener('load', () => {
     heroVideo.height = window.innerHeight/2;
     heroVideo.width = window.innerWidth;
   
-    console.log(numArray);
-    tiles.push(flow_particles,explode,confettiField, confettiField2)
-    console.log(tiles);
-    // flow_particles.createtile();
-    // explode.createtile();
-    // confettiField.createtile();
-    // confettiField2.createtile();
+    // console.log(numArray);
+    // tiles.push(flow_particles,explode,confettiField, confettiField2)
+    // console.log(tiles);
+    flow_particles.createtile();
+    explode.createtile();
+    confettiField.createtile();
+    confettiField2.createtile();
     // console.log(flow_);
-    tiles.forEach(tile => {
-      tile.createtile();
-    })
+    
   
     mainContent.append(footer);
     footer.append(footerText);
@@ -66,14 +66,10 @@ window.addEventListener('load', () => {
     
     }
   } else {
-    root.innerHTML = canvasHTML;
+    console.log(tiles);
+    root.innerHTML = h;
     root.style.backgroundColor = 'white';
-    tiles.forEach(tile => {
-      if(window.location.pathname === tile.title) {
-
-      }
-        
-    })
+    
   }
 })
 
@@ -113,9 +109,25 @@ class Tile {
     numArray.push(this.number);
 
     newTile.addEventListener('click',(e) => {
-      window.location = `/${this.title}`;
+      // window.location.pathname = `/${this.title}`;
       
+      root.innerHTML = this.html;
+      root.style.backgroundColor = 'white';
+      this.code();
+
+      let homeButton = document.createElement('button');
+      homeButton.classList.add('goHome');
+      homeButton.textContent = 'Return To Gallery';
+      root.append(homeButton);
+      homeButton.addEventListener('click', () => {
+        // root.innerHTML = mainHTML + footer;
+        location.reload();
+      })
     })
+  }
+
+  giveHtml() {
+    return this.html;
   }
 
   loadCanvasCode() {
@@ -127,13 +139,13 @@ class Tile {
 
 
 
-const flow_particles = new Tile('Flow Particles', 1, 'A particle field the user can make by hovering. The particles move toward certain points.','rgba(255,255,255,0.7)',flowParts,flowParticles)
+const flow_particles = new Tile('Flow Particles', 1, 'A particle field the user can make by hovering. The particles move toward certain points.','rgba(255,255,255,0.7)',flowParts,flowParticles,flowHTML)
 
 // console.log(flow_particles.title);
 
-const explode = new Tile('Mini-Explosions', 2, 'A simple program that lets a user create particles that spin and explode upon contact with the screen edges.','rgba(255,255,255,0.7)',explosions,explodeParticles)
+const explode = new Tile('Mini-Explosions', 2, 'A simple program that lets a user create particles that spin and explode upon contact with the screen edges.','rgba(255,255,255,0.7)',explosions,explodeParticles,canvasHTML)
 
-const confettiField = new Tile('Confetti Field',3,'A field of particles that look like confetti. The center point of low speed follows the user.','null',conf, confetti)
+const confettiField = new Tile('Confetti Field',3,'A field of particles that look like confetti. The center point of low speed follows the user.','null',conf, confetti,canvasHTML)
 
-const confettiField2 = new Tile('Confetti Field',4,'A field of particles that look like confetti. The center point of low speed follows the user.','null',conf, confetti)
+const confettiField2 = new Tile('Confetti Field',4,'A field of particles that look like confetti. The center point of low speed follows the user.','null',conf, confetti.canvasHTML)
 
