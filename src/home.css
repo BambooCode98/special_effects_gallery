@@ -162,3 +162,10 @@ html,body {
 .goHome:hover{
   background-color: rgb(192, 192, 192);
 }
+
+/* flow particles page */
+
+.container{
+  position: absolute;
+  /* border: 1px red solid; */
+}

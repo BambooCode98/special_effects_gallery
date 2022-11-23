@@ -26,7 +26,7 @@ let footerPos;
 let heroVideo;
 let gallery;
 
-
+console.log(tiles);
 
 let footer;
 
@@ -48,14 +48,9 @@ window.addEventListener('load', () => {
     heroVideo.height = window.innerHeight/2;
     heroVideo.width = window.innerWidth;
   
-    // console.log(numArray);
-    // tiles.push(flow_particles,explode,confettiField, confettiField2)
-    // console.log(tiles);
-    flow_particles.createtile();
-    explode.createtile();
-    confettiField.createtile();
-    confettiField2.createtile();
-    // console.log(flow_);
+   tiles.forEach(tile => {
+    tile.createtile();
+   })
     
   
     mainContent.append(footer);
@@ -82,6 +77,7 @@ class Tile {
     this.image = image;
     this.code = code;
     this.html = html;
+    tiles.push(this);
   }
 
   createtile() {
@@ -141,11 +137,9 @@ class Tile {
 
 const flow_particles = new Tile('Flow Particles', 1, 'A particle field the user can make by hovering. The particles move toward certain points.','rgba(255,255,255,0.7)',flowParts,flowParticles,flowHTML)
 
-// console.log(flow_particles.title);
-
 const explode = new Tile('Mini-Explosions', 2, 'A simple program that lets a user create particles that spin and explode upon contact with the screen edges.','rgba(255,255,255,0.7)',explosions,explodeParticles,canvasHTML)
 
 const confettiField = new Tile('Confetti Field',3,'A field of particles that look like confetti. The center point of low speed follows the user.','null',conf, confetti,canvasHTML)
 
-const confettiField2 = new Tile('Confetti Field',4,'A field of particles that look like confetti. The center point of low speed follows the user.','null',conf, confetti.canvasHTML)
+const confettiField2 = new Tile('Confetti Field',4,'A field of particles that look like confetti. The center point of low speed follows the user.','null',conf, confetti,canvasHTML)
 

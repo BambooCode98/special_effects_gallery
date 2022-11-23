@@ -86,6 +86,7 @@ export default function explosions() {
 
     //touch method
     canvas.addEventListener('touchmove',(e) => {
+      e.preventDefault();
       particleArray.push(new Particle(e.touches[0].clientX,e.touches[0].clientY,Math.random()*15,Math.random()*2,Math.sin((Math.random()*2)-1),'black'))
     })
 

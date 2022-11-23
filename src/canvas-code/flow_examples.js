@@ -1,27 +1,38 @@
 'use strict';
 
 export default function practice1() {
-  // example 1
-  //code modified from _______
+  
   // let can = document.createElement('canvas');
   let canvas = document.querySelector(".canvas"),
   // let canvas = can,
-  ctx = canvas.getContext("2d"),
-  width = canvas.width = window.innerWidth,
-  height = canvas.height = window.innerHeight,
-  opacity = document.querySelector(".opacity"),
-  totals = document.querySelector('.totals'),
-  disappear = document.querySelector('.dissipate'),
-  dValue = disappear.value;
-
-
-  // console.log(totals);
+      ctx = canvas.getContext("2d"),
+      width = canvas.width = window.innerWidth,
+      height = canvas.height = window.innerHeight,
+      opacity = document.querySelector(".opacity"),
+      totals = document.querySelector('.totals'),
+      disappear = document.querySelector('.dissipate'),
+      dValue = disappear.value,
+      generate = document.querySelector('.generate'),
+      range = 0;
+  
+  
+  // points that will be used to generate a field the lines will move around
+  let ra = Math.random() * 4 - 2;
+  let rb = Math.random() * 4 - 2;
+  let rc = Math.random() * 4 - 2;
+  let rd = Math.random() * 4 - 2;
 
   ctx.lineWidth = 0.5;
   let points = [];
-  // console.log(dValue);
 
-  //the setTimeouts functions allow for the dissipation of the particles to appear seamless, does not work with setInterval
+  generate.addEventListener('click', () => {
+    ra = Math.random() * 4 - 2;
+    rb = Math.random() * 4 - 2;
+    rc = Math.random() * 4 - 2;
+    rd = Math.random() * 4 - 2;
+  })
+
+  //the setTimeout functions allow for the dissipation of the particles to appear seamless, does not work with setInterval
   let dis = function () {
   dValue = disappear.value;
   points.shift();
@@ -30,6 +41,7 @@ export default function practice1() {
   setTimeout(dis, dValue)
 
   canvas.addEventListener('touchstart', (e) => {
+    e.preventDefault();
     points.push({
     x: e.touches[0].clientX,
     y: e.touches[0].clientY, 
@@ -39,6 +51,7 @@ export default function practice1() {
   })
 
   canvas.addEventListener('touchmove', (e) => {
+    e.preventDefault();
     points.push({
     x: e.touches[0].clientX,
     y: e.touches[0].clientY, 
@@ -49,8 +62,8 @@ export default function practice1() {
 
   canvas.addEventListener('mousemove', (e) => {
     points.push({
-    x: e.clientX,
-    y: e.clientY, 
+    x: e.pageX,
+    y: e.pageY, 
     vx: 0,
     vy: 0
     })
@@ -58,68 +71,104 @@ export default function practice1() {
 
   // console.log(points);
 
-  // random attractor params
-  let a = Math.random() * 4 - 2;
-  let b = Math.random() * 4 - 2;
-  let c = Math.random() * 4 - 2;
-  let d = Math.random() * 4 - 2;
-
-  render();
-
-  function render() {
-
-  ctx.fillStyle = `rgba(255,255,255,${opacity.value})`;
-  ctx.fillRect(0,0,canvas.width,canvas.height);
-  totals.textContent = `Current Particles: ${points.length}`;
-
-
-  for(var i = 0; i < points.length; i++) {
-  // get each point and do what we did before with a single point
-  var p = points[i];
-  var value = getValue(p.x, p.y);
-  // console.log(value);
-  p.vx += Math.cos(value) * 0.3;
-  p.vy += Math.sin(value) * 0.3;
-
-  // move to current position
-  ctx.beginPath();
-  ctx.moveTo(p.x, p.y);
-
-  // add velocity to position and line to new position
-  p.x += p.vx;
-  p.y += p.vy;
-  ctx.lineTo(p.x, p.y);
-  ctx.stroke();
-
-  // apply some friction so point doesn't speed up too much
-  p.vx *= 0.99;
-  p.vy *= 0.99;
-
-  // wrap around edges of screen
-  if(p.x > width) p.x = 0;
-  if(p.y > height) p.y = 0;
-  if(p.x < 0) p.x = width;
-  if(p.y < 0) p.y = height;
+  function fade(n) {
+    return ((6*n-15)*n+10)*n*n*n
   }
 
-  // call this function again in one frame tick
-  requestAnimationFrame(render);
+  function lerp(l1,l2,d) {
+    return l1 + d*(l2-l1)
   }
 
-  function getValue(x, y) {
-  // clifford attractor
-  // http://paulbourke.net/fractals/clifford/
-
-  // scale down x and y
-  let scale = 0.01;
-  x = (x - width / 2) * scale;
-  y = (y - height / 2)  * scale;
-
-  // attactor gives new x, y for old one. 
-  var x1 = Math.sin(a * y) + c * Math.cos(a * x);
-  var y1 = Math.sin(b * x) + d * Math.cos(b * y);
-
-  // find angle from old to new. that's the value.
-  return Math.atan2(y1 - y, x1 - x);
+  function smoothstep(d) {
+    let l1 = d * d;
+    let l2 = 1.0 - (1.0-d) * (1.0-d)
+    return lerp(l1,l2,d)
   }
+
+  function noiset(a,b) {
+    for(let x=0; x<width;x+=8) {
+      for(let y=0; y<height;y+=8) {
+        //the y/x times a number is how the pattern is scaled
+        let [x2,y2]=[x-a,y-b];
+        let mag1 = Math.sqrt(x*x+y*y)
+        let mag2 = Math.sqrt(x2*x2+y2*y2)
+        let dot = mag1*mag2*Math.cos(mag1-mag2)
+        let ux = fade(x);
+        let uy = fade(y);
+        let f = smoothstep(dot)
+        //range is the result of the noise funtion here, so would return base value
+        //number in the sine is the frequency
+        //amplitude is in front
+        range = (Math.sin(f*50000));
+        // let range = (Math.sin(y)*Math.cos(x));
+        range+=1;
+        range/=2;
+        let scale = 0.01;
+        a = (a-width/2) * scale;
+        b = (b-width/2) * scale;
+        let newX = Math.sin(ra*a) + rc*(Math.cos(ra*b));
+        let newY = Math.sin(rb*b) + rd*(Math.cos(rb*a));
+        let angle = Math.atan2(newX-a,newY-b);
+        // let c1 = Math.round(Math.random()*range*255);
+        // let c2 = Math.round(Math.random()*range*255);
+        // let c3 = Math.round(Math.random()*range*255);
+        // colorgrid.push({
+        //   x: x,
+        //   y: y,
+        //   color: `rgb(${c1},${c2},${c3})`,
+        //   width: 2,
+        // })
+        return angle;
+      }
+    }
+  }
+
+  function animate() {
+    ctx.fillStyle = `rgba(255,255,255,${opacity.value})`;
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    totals.textContent = `Current Particles: ${points.length}`;
+   
+    points.forEach(point => {
+      
+      
+      //clifford attractors
+      // let x2 = Math.sin(a*sy) + c*(Math.cos(a*sx));
+      // let y2 = Math.sin(b*sx) + d*(Math.cos(b*sy));
+      // let angle = Math.atan2(x2-sx,y2-sy);
+      // let angle = 0;
+
+      let angle = noiset(point.x,point.y);
+
+      point.vx += Math.cos(angle) * 0.1;
+      point.vy += Math.sin(angle) * 0.1;
+  
+      point.vx *= 0.97;
+      point.vy *= 0.97;
+
+  
+      ctx.beginPath();
+      ctx.moveTo(point.x,point.y);
+
+      // console.log(point.x,point.y);
+      point.x += point.vx;
+      point.y += point.vy;
+      // console.log(point.x,point.y);
+      
+      ctx.lineTo(point.x,point.y);
+      ctx.stroke();
+
+
+      if(point.x < 0) point.x = width;
+      if(point.y < 0) point.y = height;
+      if(point.x > width) point.x = 0;
+      if(point.y > height) point.y = 0;
+
+    })
+
+    requestAnimationFrame(animate)
+  }
+
+
+
+  animate()
 }

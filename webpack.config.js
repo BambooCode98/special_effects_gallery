@@ -70,7 +70,7 @@ module.exports = {
                 ]
               },
               minimize: true,
-              interpolation: false,
+              // interpolation: false,
             }
           }
       ]

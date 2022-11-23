@@ -33,6 +33,7 @@ export default function confetti() {
     my = e.clientY;
   })
   canvas.addEventListener('touchmove', e => {
+    e.preventDefault();
     tx = e.touches[0].clientX
     ty = e.touches[0].clientY;
   })
