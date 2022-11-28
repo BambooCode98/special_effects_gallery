@@ -37,39 +37,39 @@ let footer;
 
 window.addEventListener('load', () => {
 
-  if(window.location.pathname === '/index.html' || window.location.pathname === '/' || window.location.pathname === '/special_effects_gallery/') {
+  // if(window.location.pathname === '/index.html' || window.location.pathname === '/' || window.location.pathname === '/special_effects_gallery/') {
 
-    root.innerHTML = mainHTML + footer;
-    let mainContent = document.querySelector(".mainArea");
-    footer = document.createElement('footer');
-  
-    footer.classList.add('footer');
-    const footerText = document.createElement('p');
-    footerText.textContent = '\u00A9 2022 BambooCode98';
-  
-    heroVideo = document.querySelector(".confetti");
-    gallery = document.querySelector('.galleryContainer');
-  
-    heroVideo.height = window.innerHeight/2;
-    heroVideo.width = window.innerWidth;
-  
-   tiles.forEach(tile => {
+  // } else {
+  //   // console.log(tiles);
+  //   root.innerHTML = h;
+  //   root.style.backgroundColor = 'white';
+    
+  // }
+  root.innerHTML = mainHTML + footer;
+  let mainContent = document.querySelector(".mainArea");
+  footer = document.createElement('footer');
+
+  footer.classList.add('footer');
+  const footerText = document.createElement('p');
+  footerText.textContent = '\u00A9 2022 BambooCode98';
+
+  heroVideo = document.querySelector(".confetti");
+  gallery = document.querySelector('.galleryContainer');
+
+  heroVideo.height = window.innerHeight/2;
+  heroVideo.width = window.innerWidth;
+
+  tiles.forEach(tile => {
     tile.createtile();
-   })
-    
+  })
   
-    mainContent.append(footer);
-    footer.append(footerText);
+
+  mainContent.append(footer);
+  footer.append(footerText);
+
+  for(let i=0; i<numArray.length; i++) {
+    footer.style.bottom = `-${numArray[i]*50}%`;
   
-    for(let i=0; i<numArray.length; i++) {
-      footer.style.bottom = `-${numArray[i]*50}%`;
-    
-    }
-  } else {
-    // console.log(tiles);
-    root.innerHTML = h;
-    root.style.backgroundColor = 'white';
-    
   }
 })
 
