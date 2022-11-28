@@ -4,23 +4,32 @@ export default function practice1() {
   
   // let can = document.createElement('canvas');
   let canvas = document.querySelector(".canvas"),
-  // let canvas = can,
-      ctx = canvas.getContext("2d"),
-      width = canvas.width = window.innerWidth,
-      height = canvas.height = window.innerHeight,
-      opacity = document.querySelector(".opacity"),
-      totals = document.querySelector('.totals'),
-      disappear = document.querySelector('.dissipate'),
-      dValue = disappear.value,
-      generate = document.querySelector('.generate'),
-      range = 0;
+    ctx = canvas.getContext("2d"),
+    width = canvas.width = window.innerWidth,
+    height = canvas.height = window.innerHeight,
+    opacity = document.querySelector('.opacity'),
+    totals = document.querySelector('.totals'),
+    disappear = document.querySelector('.dissipate'),
+    dValue = disappear.value,
+    generate = document.querySelector('.generate'),
+    range = 0,
+    h = document.querySelector('.hue'),
+    s = document.querySelector('.sat'),
+    l = document.querySelector('.light'),
+    dark = document.querySelector('.night'),
+    labels = document.getElementsByTagName('label'),
+    darkOn = false;
+
   
   
   // points that will be used to generate a field the lines will move around
-  let ra = Math.random() * 4 - 2;
+  let ra = Math.random() * 8 - 4;
   let rb = Math.random() * 4 - 2;
   let rc = Math.random() * 4 - 2;
   let rd = Math.random() * 4 - 2;
+  // let rs = 0;
+  let ma = width/2;
+  let mb = height/2;
 
   ctx.lineWidth = 0.5;
   let points = [];
@@ -30,6 +39,26 @@ export default function practice1() {
     rb = Math.random() * 4 - 2;
     rc = Math.random() * 4 - 2;
     rd = Math.random() * 4 - 2;
+  })
+
+  dark.addEventListener('click', () => {
+    if(darkOn === false) {
+      canvas.style.backgroundColor = 'black';
+      for(let i=0; i < labels.length; i++) {
+        labels[i].style.color = 'white';
+      }
+      darkOn = true;
+      ctx.strokeStyle = 'white';
+      totals.style.color = 'white';
+    } else if (darkOn === true) {
+      canvas.style.backgroundColor = 'white';
+      for(let i=0; i < labels.length; i++) {
+        labels[i].style.color = 'black';
+      }
+      darkOn = false;
+      ctx.strokeStyle = 'black';
+      totals.style.color = 'black';
+    }
   })
 
   //the setTimeout functions allow for the dissipation of the particles to appear seamless, does not work with setInterval
@@ -105,10 +134,11 @@ export default function practice1() {
         range/=2;
         let scale = 0.01;
         a = (a-width/2) * scale;
-        b = (b-width/2) * scale;
+        b = (b-height/2) * scale;
         let newX = Math.sin(ra*a) + rc*(Math.cos(ra*b));
         let newY = Math.sin(rb*b) + rd*(Math.cos(rb*a));
-        let angle = Math.atan2(newX-a,newY-b);
+        let angv = 2*Math.PI*range;
+        let angle = angv * Math.atan2(newX-a,newY-b);
         // let c1 = Math.round(Math.random()*range*255);
         // let c2 = Math.round(Math.random()*range*255);
         // let c3 = Math.round(Math.random()*range*255);
@@ -124,35 +154,40 @@ export default function practice1() {
   }
 
   function animate() {
-    ctx.fillStyle = `rgba(255,255,255,${opacity.value})`;
-    ctx.fillRect(0,0,canvas.width,canvas.height);
+    if(darkOn === false) {
+      ctx.fillStyle = `rgba(255,255,255,${opacity.value})`;
+      ctx.strokeStyle = 'black';
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+    } else if (darkOn === true) {
+      ctx.fillStyle = `rgba(0,0,0,${opacity.value})`;
+      ctx.strokeStyle = 'white';
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+    }
     totals.textContent = `Current Particles: ${points.length}`;
-   
+    
     points.forEach(point => {
       
+      let h2 = h.value;
+      let s2 = s.value;
+      let l2 = l.value;
       
-      //clifford attractors
-      // let x2 = Math.sin(a*sy) + c*(Math.cos(a*sx));
-      // let y2 = Math.sin(b*sx) + d*(Math.cos(b*sy));
-      // let angle = Math.atan2(x2-sx,y2-sy);
-      // let angle = 0;
-
       let angle = noiset(point.x,point.y);
-
+      
+      // rs += angle * Math.random();
       point.vx += Math.cos(angle) * 0.1;
       point.vy += Math.sin(angle) * 0.1;
-  
+      
       point.vx *= 0.97;
       point.vy *= 0.97;
-
-  
+      
+      
       ctx.beginPath();
       ctx.moveTo(point.x,point.y);
-
-      // console.log(point.x,point.y);
+      // console.log(h);
+      ctx.strokeStyle = `hsl(${h2},${s2}%,${l2}%)`
+      
       point.x += point.vx;
       point.y += point.vy;
-      // console.log(point.x,point.y);
       
       ctx.lineTo(point.x,point.y);
       ctx.stroke();
@@ -167,7 +202,6 @@ export default function practice1() {
 
     requestAnimationFrame(animate)
   }
-
 
 
   animate()

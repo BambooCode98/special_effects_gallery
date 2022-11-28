@@ -1,9 +1,12 @@
 import mainHTML from './html-components/main.html';
 import flowHTML from './html-components/flow-particles.html';
+import flowHTML2 from './html-components/flow-particles2.html';
 import canvasHTML from './html-components/canvas-only.html';
 import flowParticles from './canvas-code/flow_examples';
 import explodeParticles from './canvas-code/explode.js';
 import confetti from './canvas-code/confetti';
+import perlinFlow from './canvas-code/perlin-flow';
+import vortex from './canvas-code/vortex';
 
 
 import hero from './images/special_effects_gallery_hero.png';
@@ -11,6 +14,8 @@ import './home.css';
 import flowParts from './images/flow_parts.png';
 import explosions from './images/explode.png';
 import conf from './images/confetti.png';
+import perlinFlowField from './images/perlin_flow_field.png';
+import bh from './images/blackhole.png'
 
 
 const root = document.querySelector('#root');
@@ -89,7 +94,7 @@ class Tile {
     title.classList.add('title');
     desc.classList.add('desc');
 
-    if(this.number === 1) newTile.style.marginTop = '15%';
+    // if(this.number === 1) newTile.style.marginTop = '15%';
     newTile.style.top = `${this.number*50}%`;
     newTile.style.backgroundImage = `url(${this.image})`;
 
@@ -135,11 +140,12 @@ class Tile {
 
 
 
-const flow_particles = new Tile('Flow Particles', 1, 'A particle field the user can make by hovering. The particles move toward certain points.','rgba(255,255,255,0.7)',flowParts,flowParticles,flowHTML)
+const flow_particles = new Tile('Flow Particles', 1, 'A particle field the user can make by hovering. The particles move toward certain points.','rgba(255,255,255,0.7)',flowParts,flowParticles,flowHTML2)
 
 const explode = new Tile('Mini-Explosions', 2, 'A simple program that lets a user create particles that spin and explode upon contact with the screen edges.','rgba(255,255,255,0.7)',explosions,explodeParticles,canvasHTML)
 
-const confettiField = new Tile('Confetti Field',3,'A field of particles that look like confetti. The center point of low speed follows the user.','null',conf, confetti,canvasHTML)
+const confettiField = new Tile('Confetti Field',3,'A field of particles that look like confetti. The center point of low speed follows the user.','null',conf, confetti, canvasHTML)
 
-const confettiField2 = new Tile('Confetti Field',4,'A field of particles that look like confetti. The center point of low speed follows the user.','null',conf, confetti,canvasHTML)
+const PerlinFlow = new Tile('Perlin Flow', 4, 'A field similar to the particle flow, but with perlin noise applied to it.', null, perlinFlowField, perlinFlow, flowHTML)
 
+const Vortex = new Tile('Blackhole', 5, "A simple program that emulates a blackhole. The user can create particles that will flow into the middle.", "no color", bh, vortex, flowHTML)
