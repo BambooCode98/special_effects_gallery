@@ -37,7 +37,7 @@ let footer;
 
 window.addEventListener('load', () => {
 
-  if(window.location.pathname === '/index.html' || window.location.pathname === '/') {
+  if(window.location.pathname === '/index.html' || window.location.pathname === '/' || window.location.pathname === '/special_effects_gallery/') {
 
     root.innerHTML = mainHTML + footer;
     let mainContent = document.querySelector(".mainArea");
@@ -66,7 +66,7 @@ window.addEventListener('load', () => {
     
     }
   } else {
-    console.log(tiles);
+    // console.log(tiles);
     root.innerHTML = h;
     root.style.backgroundColor = 'white';
     
