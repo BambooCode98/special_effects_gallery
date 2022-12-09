@@ -2,11 +2,14 @@ import mainHTML from './html-components/main.html';
 import flowHTML from './html-components/flow-particles.html';
 import flowHTML2 from './html-components/flow-particles2.html';
 import canvasHTML from './html-components/canvas-only.html';
+import titleHTML from './html-components/title-only.html';
 import flowParticles from './canvas-code/flow_examples';
 import explodeParticles from './canvas-code/explode.js';
 import confetti from './canvas-code/confetti';
 import perlinFlow from './canvas-code/perlin-flow';
+import blackhole from './canvas-code/blackhole';
 import vortex from './canvas-code/vortex';
+import mandelSet from './canvas-code/mandlebrotSet';
 
 
 import hero from './images/special_effects_gallery_hero.png';
@@ -16,35 +19,28 @@ import explosions from './images/explode.png';
 import conf from './images/confetti.png';
 import perlinFlowField from './images/perlin_flow_field.png';
 import bh from './images/blackhole.png'
+import mandelbrot from './images/MandelbrotSet.png'
+import snake from './canvas-code/snakeGame';
 
 
 const root = document.querySelector('#root');
 
 let numArray = [];
 let tiles = [];
-let h = tiles[0];
+// let h = tiles[0];
 
-let canvasCodePage = [];
-let heightPos = window.innerHeight;
-let footerPos;
+// let canvasCodePage = [];
+// let heightPos = window.innerHeight;
+// let footerPos;
 
 let heroVideo;
 let gallery;
 
-console.log(tiles);
 
 let footer;
 
 window.addEventListener('load', () => {
 
-  // if(window.location.pathname === '/index.html' || window.location.pathname === '/' || window.location.pathname === '/special_effects_gallery/') {
-
-  // } else {
-  //   // console.log(tiles);
-  //   root.innerHTML = h;
-  //   root.style.backgroundColor = 'white';
-    
-  // }
   root.innerHTML = mainHTML + footer;
   let mainContent = document.querySelector(".mainArea");
   footer = document.createElement('footer');
@@ -110,7 +106,6 @@ class Tile {
     numArray.push(this.number);
 
     newTile.addEventListener('click',(e) => {
-      // window.location.pathname = `/${this.title}`;
       
       root.innerHTML = this.html;
       root.style.backgroundColor = 'white';
@@ -148,4 +143,10 @@ const confettiField = new Tile('Confetti Field',3,'A field of particles that loo
 
 const PerlinFlow = new Tile('Perlin Flow', 4, 'A field similar to the particle flow, but with perlin noise applied to it.', null, perlinFlowField, perlinFlow, flowHTML)
 
-const Vortex = new Tile('Blackhole', 5, "A simple program that emulates a blackhole. The user can create particles that will flow into the middle.", "no color", bh, vortex, flowHTML)
+const Blackhole = new Tile('Blackhole', 5, "A simple program that emulates a blackhole. The user can create particles that will flow into the middle.", "no color", bh, blackhole, flowHTML)
+
+const Vortex = new Tile('Vortex', 6, "A program that emulates a cylone.", "", "", vortex, flowHTML)
+
+const MandelbrotSet = new Tile("Mandelbrot Set", 7, "The generation of the Mandelbrot Set. Currently has different transformations applied to it.", "", mandelbrot, mandelSet, flowHTML)
+
+const Snake = new Tile("Snake Game", 8, "snake", "", "", snake, titleHTML)

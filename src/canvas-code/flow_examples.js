@@ -28,8 +28,8 @@ export default function practice1() {
   let rc = Math.random() * 4 - 2;
   let rd = Math.random() * 4 - 2;
   // let rs = 0;
-  let ma = width/2;
-  let mb = height/2;
+  // let ma = width/2;
+  // let mb = height/2;
 
   ctx.lineWidth = 0.5;
   let points = [];

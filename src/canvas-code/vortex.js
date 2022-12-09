@@ -14,10 +14,8 @@ export default function vortex() {
       dValue = disappear.value,
       generate = document.querySelector('.generate'),
       range = 0,
-      random = Math.random()*16-8,
-      gravity = 9.8,
-      cx = width/2,
-      cy = height/2,
+      cx = 0,
+      cy = 0,
       labels = document.getElementsByTagName('label');
 
   canvas.width = width;
@@ -32,8 +30,6 @@ export default function vortex() {
   // let rb = Math.random() * 4 - 2;
   // let rc = Math.random() * 4 - 2;
   // let rd = Math.random() * 4 - 2;
-  // let ma = width/2;
-  // let mb = height/2;
 
   ctx.lineWidth = 0.5;
   let particles = [];
@@ -91,8 +87,6 @@ export default function vortex() {
       //Fg is the gravity vector
       const Fg = ((circle.mass*this.mass)/r*r)
   
-      // console.log(Fg);
-      // this.theta += angle;
       this.vx += Math.cos(angle)
       this.vy += Math.sin(angle)
       // this.vx += Fg
@@ -100,8 +94,8 @@ export default function vortex() {
       this.vx += Fg*0.01*Math.random();
       this.vy += Fg*0.01*Math.random();
   
-      this.vx *= 0.95;
-      this.vy *= 0.95;
+      this.vx *= 0.9;
+      this.vy *= 0.9;
 
     }
 
@@ -130,23 +124,11 @@ export default function vortex() {
 
   
   function animate() {
-    ctx.fillStyle = `rgba(0,0,0,${opacity.value})`;
+    ctx.fillStyle = `rgba(255,255,255,${opacity.value})`;
     ctx.fillRect(0,0,canvas.width,canvas.height);
     totals.textContent = `Current Particles: ${particles.length}`;
     
-    ctx.save();
-    ctx.beginPath();
-    ctx.arc(width/2,height/2,5,0, Math.PI*2)
-    ctx.fillStyle = "black"
-    ctx.shadowBlur = 5;
-    ctx.shadowColor = "red";
-    ctx.fill();
-    ctx.restore();
-    
-    ctx.save();
-    ctx.shadowColor='#a6a8ff';
-    ctx.shadowBlur = 2;
-    // ctx.strokeStyle = 'rgba(0,0,0,1)';
+   
     ctx.beginPath();
     particles.forEach(p => {
       p.update();
@@ -162,7 +144,7 @@ export default function vortex() {
     
     
     
-    requestAnimationFrame(animate)
+    // requestAnimationFrame(animate)
   }
   
   animate()
