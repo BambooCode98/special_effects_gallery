@@ -135,7 +135,8 @@ html,body {
   align-items: center;
   color: white;
   border-top: white 1px solid;
-  bottom: -100%;
+  /* bottom: -100%; */
+  /* margin-top: 50px; */
 }
 
 

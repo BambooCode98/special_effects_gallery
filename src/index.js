@@ -63,10 +63,19 @@ window.addEventListener('load', () => {
   mainContent.append(footer);
   footer.append(footerText);
 
-  for(let i=0; i<numArray.length; i++) {
-    footer.style.bottom = `-${numArray[i]*25}%`;
-  
-  }
+  // footer.style.marginTop = '5%'
+
+  // if(width < 760) {
+  //   for(let i=0; i<numArray.length; i++) {
+  //     footer.style.bottom = `-${numArray[i]*25.5}%`;
+    
+  //   }
+  // } else if(width >= 760) {
+  //   for(let i=0; i<numArray.length; i++) {
+  //     footer.style.bottom = `-${numArray[i]*5}%`;
+    
+  //   }
+  // }
 })
 
 class Tile {
