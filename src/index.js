@@ -41,20 +41,20 @@ let footer;
 
 window.addEventListener('load', () => {
 
-  root.innerHTML = mainHTML + footer;
+  root.innerHTML = mainHTML;
   let mainContent = document.querySelector(".mainArea");
   footer = document.createElement('footer');
-
+  
   footer.classList.add('footer');
   const footerText = document.createElement('p');
   footerText.textContent = '\u00A9 2022 BambooCode98';
-
+  
   heroVideo = document.querySelector(".confetti");
   gallery = document.querySelector('.galleryContainer');
-
+  
   heroVideo.height = window.innerHeight/2;
   heroVideo.width = window.innerWidth;
-
+  
   tiles.forEach(tile => {
     tile.createtile();
   })
@@ -64,7 +64,7 @@ window.addEventListener('load', () => {
   footer.append(footerText);
 
   for(let i=0; i<numArray.length; i++) {
-    footer.style.bottom = `-${numArray[i]*50}%`;
+    footer.style.bottom = `-${numArray[i]*25}%`;
   
   }
 })
@@ -86,12 +86,21 @@ class Tile {
     let title = document.createElement('h1');
     let desc = document.createElement('p');
     let image = document.createElement('img');
-    newTile.classList.add(`card`);
+    newTile.classList.add(`card${this.number}`);
     title.classList.add('title');
     desc.classList.add('desc');
 
     // if(this.number === 1) newTile.style.marginTop = '15%';
-    newTile.style.top = `${this.number*50}%`;
+    // newTile.style.top = `${this.number*50}%`;
+    newTile.style.width = `250px`;
+    newTile.style.height = `250px`;
+    newTile.style.backgroundSize = 'cover';
+    newTile.style.backgroundRepeat = 'no-repeat';
+    newTile.style.cursor = 'pointer';
+    newTile.style.overflow = 'hidden';
+    newTile.style.boxShadow = '2px 1px 10px white';
+    newTile.style.borderRadius = '2px';
+
     newTile.style.backgroundImage = `url(${this.image})`;
 
     title.textContent = this.title;
@@ -99,7 +108,7 @@ class Tile {
 
     // image.src = this.image;
     // image.classList.add('images')
-    footer.style.bottom = `${this.number*50}`;
+    // footer.style.bottom = `${this.number*50}`;
 
     newTile.append(title, desc,image);
     gallery.append(newTile);
@@ -135,7 +144,7 @@ class Tile {
 
 
 
-const flow_particles = new Tile('Flow Particles', 1, 'A particle field the user can make by hovering. The particles move toward certain points.','rgba(255,255,255,0.7)',flowParts,flowParticles,flowHTML2)
+const flow_particles = new Tile('Flow Particles', 1, 'A particle field the user can make by hovering. The particles move toward certain points.','',flowParts,flowParticles,flowHTML2)
 
 const explode = new Tile('Mini-Explosions', 2, 'A simple program that lets a user create particles that spin and explode upon contact with the screen edges.','rgba(255,255,255,0.7)',explosions,explodeParticles,canvasHTML)
 
@@ -149,4 +158,4 @@ const Vortex = new Tile('Vortex', 6, "A program that emulates a cylone.", "", ""
 
 const MandelbrotSet = new Tile("Mandelbrot Set", 7, "The generation of the Mandelbrot Set. Currently has different transformations applied to it.", "", mandelbrot, mandelSet, flowHTML)
 
-const Snake = new Tile("Snake Game", 8, "snake", "", "", snake, titleHTML)
+const Snake = new Tile("Snake Game", 8, "The snake game with dfferent controls.", "", mandelbrot, snake, titleHTML)

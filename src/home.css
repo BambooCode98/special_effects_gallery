@@ -90,10 +90,9 @@ html,body {
   /* width: fit-content; */
 }
 
-.card{
+/* .card{
   box-shadow: 2px 1px 10px white;
   border-radius: 2px;
-  /* border: 1px solid black; */
   height: 250px;
   width: 250px;
   position: absolute;
@@ -102,7 +101,7 @@ html,body {
   background-repeat: no-repeat;
   overflow: hidden;
   cursor: pointer;
-}
+} */
 
 .title{
   background-color: rgba(255,255,255,0.8);
@@ -174,3 +173,16 @@ html,body {
   /* border: 1px red solid; */
   z-index: 99;
 }
+
+
+.galleryContainer{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 3fr));
+  padding: 25px;
+  padding-top: 75px;
+  gap: 20px;
+  background-color: black;
+  justify-items: center;
+}
+/* @media screen and (min-width: 760px) {
+} */
