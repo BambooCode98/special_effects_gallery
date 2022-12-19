@@ -10,6 +10,7 @@ import perlinFlow from './canvas-code/perlin-flow';
 import blackhole from './canvas-code/blackhole';
 import vortex from './canvas-code/vortex';
 import mandelSet from './canvas-code/mandlebrotSet';
+import snake from './canvas-code/snakeGame';
 
 
 import hero from './images/special_effects_gallery_hero.png';
@@ -19,8 +20,8 @@ import explosions from './images/explode.png';
 import conf from './images/confetti.png';
 import perlinFlowField from './images/perlin_flow_field.png';
 import bh from './images/blackhole.png'
-import mandelbrot from './images/MandelbrotSet.png'
-import snake from './canvas-code/snakeGame';
+import mandelbrot from './images/MandelbrotSet.png';
+import snakeImg from './images/snakegame.png';
 
 
 const root = document.querySelector('#root');
@@ -167,4 +168,4 @@ const Blackhole = new Tile('Blackhole', 5, "A simple program that emulates a bla
 
 const MandelbrotSet = new Tile("Mandelbrot Set", 7, "The generation of the Mandelbrot Set. Currently has different transformations applied to it.", "", mandelbrot, mandelSet, flowHTML)
 
-const Snake = new Tile("Snake Game", 8, "The snake game with dfferent controls.", "", mandelbrot, snake, titleHTML)
+const Snake = new Tile("Snake Game", 8, "The snake game with different controls, easier maneuvering, and 360 degree range of motion. Includes touch support.", "", snakeImg, snake, titleHTML)
