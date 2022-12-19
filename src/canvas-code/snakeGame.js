@@ -118,9 +118,9 @@ export default  function snake() {
     }
 
     draw() {
-      ctx.fillRect(this.x-5,this.y-5,10,10)
+      ctx.fillRect(this.x,this.y,20,20)
       this.parts.forEach(part => {
-        ctx.fillRect(part.x-5,part.y-5,10,10)
+        ctx.fillRect(part.x,part.y,10,10)
         
       })
     }
@@ -128,54 +128,54 @@ export default  function snake() {
   
   let snake1 = new Snake(mx,my,5)
   let item = new Item(width/2-5,height/2-5)
-  let enemy = new Enemy(10,10)
+  // let enemy = new Enemy(10,10)
 
-  function lerp(l1,l2,d) {
-    return l1 + d*(l2-l1)
-  }
+  // function lerp(l1,l2,d) {
+  //   return l1 + d*(l2-l1)
+  // }
 
-  function smoothstep(d) {
-    let l1 = d * d;
-    let l2 = 1.0 - (1.0-d) * (1.0-d)
-    return lerp(l1,l2,d)
-  }
+  // function smoothstep(d) {
+  //   let l1 = d * d;
+  //   let l2 = 1.0 - (1.0-d) * (1.0-d)
+  //   return lerp(l1,l2,d)
+  // }
 
-  function noise(a,b) {
-    for(let x=0; x<width;x+=8) {
-      for(let y=0; y<height;y+=8) {
-        //the y/x times a number is how the pattern is scaled
-        let [x2,y2]=[x-a,y-b];
-        let mag1 = Math.sqrt(x*x+y*y)
-        let mag2 = Math.sqrt(x2*x2+y2*y2)
-        let dot = mag1*mag2*Math.cos(mag1-mag2)
-        // let ux = fade(x);
-        // let uy = fade(y);
-        let f = smoothstep(dot)
-        //range is the result of the noise funtion here, so would return base value
-        //number in the sine is the frequency
-        //amplitude is in front
-        range = (Math.sin(f*50000));
-        // let range = (Math.sin(y)*Math.cos(x));
-        range+=1;
-        range/=2;
-        return range;
-      }
-    }
-  }
+  // function noise(a,b) {
+  //   for(let x=0; x<width;x+=8) {
+  //     for(let y=0; y<height;y+=8) {
+  //       //the y/x times a number is how the pattern is scaled
+  //       let [x2,y2]=[x-a,y-b];
+  //       let mag1 = Math.sqrt(x*x+y*y)
+  //       let mag2 = Math.sqrt(x2*x2+y2*y2)
+  //       let dot = mag1*mag2*Math.cos(mag1-mag2)
+  //       // let ux = fade(x);
+  //       // let uy = fade(y);
+  //       let f = smoothstep(dot)
+  //       //range is the result of the noise funtion here, so would return base value
+  //       //number in the sine is the frequency
+  //       //amplitude is in front
+  //       range = (Math.sin(f*50000));
+  //       // let range = (Math.sin(y)*Math.cos(x));
+  //       range+=1;
+  //       range/=2;
+  //       return range;
+  //     }
+  //   }
+  // }
 
   
   function animate() {
-    let num = noise(mx,my)
+    // let num = noise(mx,my)
     // console.log(num);
 
     snake1.update(mx,my)
     item.update();
-    enemy.update(Math.random()*num*mx,Math.random()*num*my);
+    // enemy.update(Math.random()*num*mx,Math.random()*num*my);
     ctx.clearRect(0,0,width,height);
     snake1.draw();
     item.draw();
    
-    enemy.spawn()
+    // enemy.spawn()
     
     snake1.lastPosition(mx,my)
 

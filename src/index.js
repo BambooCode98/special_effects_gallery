@@ -163,7 +163,7 @@ const PerlinFlow = new Tile('Perlin Flow', 4, 'A field similar to the particle f
 
 const Blackhole = new Tile('Blackhole', 5, "A simple program that emulates a blackhole. The user can create particles that will flow into the middle.", "no color", bh, blackhole, flowHTML)
 
-const Vortex = new Tile('Vortex', 6, "A program that emulates a cylone.", "", "", vortex, flowHTML)
+// const Vortex = new Tile('Vortex', 6, "A program that emulates a cylone.", "", "", vortex, flowHTML)
 
 const MandelbrotSet = new Tile("Mandelbrot Set", 7, "The generation of the Mandelbrot Set. Currently has different transformations applied to it.", "", mandelbrot, mandelSet, flowHTML)
 
