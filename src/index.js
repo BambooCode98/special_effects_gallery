@@ -3,6 +3,7 @@ import flowHTML from './html-components/flow-particles.html';
 import flowHTML2 from './html-components/flow-particles2.html';
 import canvasHTML from './html-components/canvas-only.html';
 import titleHTML from './html-components/title-only.html';
+
 import flowParticles from './canvas-code/flow_examples';
 import explodeParticles from './canvas-code/explode.js';
 import confetti from './canvas-code/confetti';
@@ -12,6 +13,7 @@ import vortex from './canvas-code/vortex';
 import mandelSet from './canvas-code/mandlebrotSet';
 import snake from './canvas-code/snakeGame';
 import unkown from './canvas-code/attractors/unknown';
+import bubbles from './canvas-code/bubbles';
 
 
 import hero from './images/special_effects_gallery_hero.png';
@@ -172,3 +174,5 @@ const MandelbrotSet = new Tile("Mandelbrot Set", 7, "The generation of the Mande
 const Snake = new Tile("Snake Game", 8, "The snake game with different controls, easier maneuvering, and 360 degree range of motion. Includes touch support.", "", snakeImg, snake, titleHTML)
 
 const Unknown = new Tile('Dandelion Attractor',9,"I don't know what this is, so I will call it the Dandelion Attractor.","", dandelion, unkown, canvasHTML)
+
+const Bubbles = new Tile('Bubbles',10,"Mobile Bubbles","","image",bubbles,canvasHTML)
