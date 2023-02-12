@@ -99,8 +99,8 @@ export default function unkown() {
     // theta+=0.03
     
     //these are attractors/repellors
-    a = 2500*0.01;
-    b = 2000*0.01;
+    a = (width)*0.01;
+    b = (height)*0.01;
     c = 2500*0.01;
     
     // console.log(a,b);
