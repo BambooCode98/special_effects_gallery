@@ -31,6 +31,10 @@ export default function unkown() {
     p.push(new Particle(e.pageX,e.pageY))
   })
 
+  canvas.addEventListener('touchmove', (e) => {
+    p.push(new Particle(e.touches[0].clientX,e.touches[0].clientY))
+  })
+
   class Particle{
     constructor(x,y) {
       this.x = x;
@@ -94,9 +98,9 @@ export default function unkown() {
     // theta+=0.03
     
     //these are attractors/repellors
-    a = 2000*0.01;
+    a = 2500*0.01;
     b = 2000*0.01;
-    c = 2000*0.01;
+    c = 2500*0.01;
     
     // console.log(a,b);
     // console.log(part1.x);
