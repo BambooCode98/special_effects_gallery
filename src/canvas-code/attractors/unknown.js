@@ -32,6 +32,7 @@ export default function unkown() {
   })
 
   canvas.addEventListener('touchmove', (e) => {
+    e.preventDefault();
     p.push(new Particle(e.touches[0].clientX,e.touches[0].clientY))
   })
 
