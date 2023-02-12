@@ -14,8 +14,8 @@ export default function unkown() {
       angle = 0,
       px = 0,
       py = 0,
-      rx = 0,
-      ry = 0,
+      mx = 0,
+      my = 0,
       a = 0,
       b = 0,
       c = 0,
@@ -28,7 +28,9 @@ export default function unkown() {
 
 
   canvas.addEventListener('mousemove', (e) => {
-    p.push(new Particle(e.pageX,e.pageY))
+    p.push(new Particle(e.pageX,e.pageY));
+    mx = e.pageX;
+    my = e.pageY;
   })
 
   canvas.addEventListener('touchmove', (e) => {
@@ -51,7 +53,8 @@ export default function unkown() {
 
     update(dx,dy,dz) {
 
-
+      // let mutatedx = Math.tan(dx*this.x);
+      // let mutatedy = Math.tan(dy*this.y);
       // console.log(dz);
       let value = Math.atan2(this.y-dy*dz,this.x-dx*dz)
       
@@ -101,6 +104,8 @@ export default function unkown() {
     //these are attractors/repellors
     a = (width)*0.01;
     b = (height)*0.01;
+    // a = mx;
+    // b = my;
     c = 2500*0.01;
     
     // console.log(a,b);

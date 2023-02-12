@@ -11,6 +11,7 @@ import blackhole from './canvas-code/blackhole';
 import vortex from './canvas-code/vortex';
 import mandelSet from './canvas-code/mandlebrotSet';
 import snake from './canvas-code/snakeGame';
+import unkown from './canvas-code/attractors/unknown';
 
 
 import hero from './images/special_effects_gallery_hero.png';
@@ -22,8 +23,7 @@ import perlinFlowField from './images/perlin_flow_field.png';
 import bh from './images/blackhole.png'
 import mandelbrot from './images/MandelbrotSet.png';
 import snakeImg from './images/snakegame.png';
-import unkown from './canvas-code/attractors/unknown';
-
+import dandelion from './images/dandelion_attractor.png';
 
 const root = document.querySelector('#root');
 
@@ -171,4 +171,4 @@ const MandelbrotSet = new Tile("Mandelbrot Set", 7, "The generation of the Mande
 
 const Snake = new Tile("Snake Game", 8, "The snake game with different controls, easier maneuvering, and 360 degree range of motion. Includes touch support.", "", snakeImg, snake, titleHTML)
 
-const Unknown = new Tile('Unknown',9,"unknown","", "", unkown, canvasHTML)
+const Unknown = new Tile('Dandelion Attractor',9,"I don't know what this is, so I will call it the Dandelion Attractor.","", dandelion, unkown, canvasHTML)
