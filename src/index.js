@@ -22,6 +22,7 @@ import perlinFlowField from './images/perlin_flow_field.png';
 import bh from './images/blackhole.png'
 import mandelbrot from './images/MandelbrotSet.png';
 import snakeImg from './images/snakegame.png';
+import unkown from './canvas-code/attractors/unknown';
 
 
 const root = document.querySelector('#root');
@@ -48,7 +49,7 @@ window.addEventListener('load', () => {
   
   footer.classList.add('footer');
   const footerText = document.createElement('p');
-  footerText.textContent = '\u00A9 2022 BambooCode98';
+  footerText.textContent = '\u00A9 2022-2023 BambooCode98';
   
   heroVideo = document.querySelector(".confetti");
   gallery = document.querySelector('.galleryContainer');
@@ -169,3 +170,5 @@ const Blackhole = new Tile('Blackhole', 5, "A simple program that emulates a bla
 const MandelbrotSet = new Tile("Mandelbrot Set", 7, "The generation of the Mandelbrot Set. Currently has different transformations applied to it.", "", mandelbrot, mandelSet, flowHTML)
 
 const Snake = new Tile("Snake Game", 8, "The snake game with different controls, easier maneuvering, and 360 degree range of motion. Includes touch support.", "", snakeImg, snake, titleHTML)
+
+const Unknown = new Tile('Unknown',9,"unknown","", "", unkown, canvasHTML)

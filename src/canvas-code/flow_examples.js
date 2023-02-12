@@ -125,7 +125,7 @@ export default function practice1() {
         let ux = fade(x);
         let uy = fade(y);
         let f = smoothstep(dot)
-        //range is the result of the noise funtion here, so would return base value
+        //range is the result of the noise function here, so would return base value
         //number in the sine is the frequency
         //amplitude is in front
         range = (Math.sin(f*50000));
