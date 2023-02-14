@@ -202,6 +202,10 @@ button{
   width: 200px;
 }
 
+.totals {
+  font-size: 0.9em;
+}
+
 input{
   margin-top: -15px;
   /* marginleft: 2px; */
@@ -216,7 +220,7 @@ input:focus{
   position: absolute;
   bottom: 2%;
   left: 150px;
-  padding: 0.5% 0.5%;
+  padding: 1.5% 1.5%;
   background-color: white;
   border: 1px solid black;
   border-radius: 5px;
@@ -225,3 +229,8 @@ input:focus{
   /* margin-left: 10%; */
 }
 
+@media (min-width:750px) {
+  button{
+    padding: 0.5% 0.5%;
+  }
+}
