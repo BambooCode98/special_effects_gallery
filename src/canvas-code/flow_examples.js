@@ -79,12 +79,14 @@ export default function practice1() {
   })
 
   //the setTimeout functions allow for the dissipation of the particles to appear seamless, does not work with setInterval
-  let dis = function () {
-    dValue = disappear.value;
-    points.shift();
+  if(points.length >= 0) {
+    let dis = function () {
+      dValue = disappear.value;
+      points.shift();
+      setTimeout(dis, dValue)
+    }
     setTimeout(dis, dValue)
   }
-  setTimeout(dis, dValue)
 
   canvas.addEventListener('touchstart', (e) => {
     e.preventDefault();

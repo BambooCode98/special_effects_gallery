@@ -90,13 +90,14 @@ export default function unkown() {
 
 
 
-
-  let dis = function () {
-    dValue = disappear.value;
-    p.shift();
+  if(p.length >= 0) {
+    let dis = function () {
+      dValue = disappear.value;
+      p.shift();
+      setTimeout(dis, dValue)
+    }
     setTimeout(dis, dValue)
   }
-  setTimeout(dis, dValue)
 
 
 
@@ -173,12 +174,9 @@ export default function unkown() {
     //these are attractors/repellors
     a = (width)*0.01;
     b = (height)*0.01;
-    // a = mx;
-    // b = my;
     c = 2500*0.01;
     
-    // console.log(a,b);
-    // console.log(part1.x);
+    
     
     p.forEach(p => {
       p.update(a,b,c);

@@ -1,21 +1,30 @@
 'use strict';
 
 export default function explosions() {
-  console.log('hi');
   let canvas = document.querySelector('.canvas');
   let ctx = canvas.getContext('2d');
   let particleArray = [];
+  let dValue = 100;
   let boxX = 200;
   let boxY = 200;
   let [boxW,boxH] = [200,200]
 
   ctx.canvas.width = window.innerWidth;
   ctx.canvas.height = window.innerHeight;
-  window.addEventListener('load',() => {
-    // ctx.shadowBlur = 15;
-    // ctx.shadowColor = 'lightblue';
+  // window.addEventListener('load',() => {
+  //   // ctx.shadowBlur = 15;
+  //   // ctx.shadowColor = 'lightblue';
     
-  })
+  // })
+  if(particleArray.length >= 0) {
+    let dis = function () {
+      // dValue = disappear.value;
+      particleArray.shift();
+      setTimeout(dis, dValue)
+    }
+    setTimeout(dis, dValue)
+  }
+
   animate()
   // console.log('works?');
 
