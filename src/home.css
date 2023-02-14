@@ -14,6 +14,14 @@ html,body {
   overflow: none;
 }
 
+button{
+  padding: 0.5% 0.5%;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 .videoWrap{
   position: relative;
   display: flex;
@@ -167,13 +175,6 @@ html,body {
 
 /* flow particles page */
 
-.container{
-  position: absolute;
-  /* background-color: black; */
-  /* top: 10px; */
-  /* border: 1px red solid; */
-  z-index: 99;
-}
 
 
 .galleryContainer{
@@ -185,5 +186,42 @@ html,body {
   background-color: black;
   justify-items: center;
 }
-/* @media screen and (min-width: 760px) {
-} */
+
+.container{
+  position: absolute;
+  /* background-color: black; */
+  /* top: 10px; */
+  /* border: 1px red solid; */
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  /* position: absolute; */
+  gap: 15px;
+  /* padding: 0.5%; */
+  margin-left: 10px;
+  width: 200px;
+}
+
+input{
+  margin-top: -15px;
+  /* marginleft: 2px; */
+}
+
+input:focus{
+  border: none;
+  margin: 0;
+}
+
+.hide{
+  position: absolute;
+  bottom: 2%;
+  left: 150px;
+  padding: 0.5% 0.5%;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 5;
+  /* margin-left: 10%; */
+}
+

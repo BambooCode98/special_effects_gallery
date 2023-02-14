@@ -1,7 +1,5 @@
 'use strict';
 
-import vortex from "../vortex";
-
 
 export default function unkown() {
 
@@ -24,7 +22,23 @@ export default function unkown() {
       canvas = document.querySelector(".canvas"),
       ctx = canvas.getContext('2d'),
       width = canvas.width = window.innerWidth,
-      height = canvas.height = window.innerHeight;
+      height = canvas.height = window.innerHeight,
+      menu = document.querySelector('.container'),
+      opacity = document.querySelector('.opacity'),
+      totals = document.querySelector('.totals'),
+      disappear = document.querySelector('.dissipate'),
+      generate = document.querySelector('.generate'),
+      hide = document.querySelector('.hide'),
+      dValue = disappear.value,
+      range = 0,
+      h = document.querySelector('.hue'),
+      s = document.querySelector('.sat'),
+      l = document.querySelector('.light'),
+      dark = document.querySelector('.night'),
+      labels = document.getElementsByTagName('label'),
+      darkOn = false,
+      hideOn = false,
+      p = [];
 
 
   canvas.addEventListener('mousemove', (e) => {
@@ -37,6 +51,52 @@ export default function unkown() {
     e.preventDefault();
     p.push(new Particle(e.touches[0].clientX,e.touches[0].clientY))
   })
+
+  dark.addEventListener('click', () => {
+    if(darkOn === false) {
+      canvas.style.backgroundColor = 'black';
+      for(let i=0; i < labels.length; i++) {
+        labels[i].style.color = 'white';
+      }
+      darkOn = true;
+      ctx.strokeStyle = 'white';
+      totals.style.color = 'white';
+      l.value = 100;
+    } else if (darkOn === true) {
+      canvas.style.backgroundColor = 'white';
+      for(let i=0; i < labels.length; i++) {
+        labels[i].style.color = 'black';
+      }
+      darkOn = false;
+      ctx.strokeStyle = 'black';
+      totals.style.color = 'black';
+      l.value = 0;
+    }
+  })
+
+  hide.addEventListener('click', () => {
+    if(hideOn === false) {
+      hideOn = true;
+      menu.style.display = "none";
+    } else if (hideOn = true) {
+      hideOn = false;
+      menu.style.display = "flex";
+    }
+  })
+
+
+
+
+
+
+  let dis = function () {
+    dValue = disappear.value;
+    p.shift();
+    setTimeout(dis, dValue)
+  }
+  setTimeout(dis, dValue)
+
+
 
   class Particle{
     constructor(x,y) {
@@ -52,6 +112,8 @@ export default function unkown() {
     // }
 
     update(dx,dy,dz) {
+      ctx.strokeStyle = `hsl(${h.value},${s.value}%,${l.value}%)`
+
 
       // let mutatedx = Math.tan(dx*this.x);
       // let mutatedy = Math.tan(dy*this.y);
@@ -81,21 +143,26 @@ export default function unkown() {
     }
   }
 
-  let part1 = new Particle(width/2,height/3);
-  let part2 = new Particle(width/2.5,height/3.5);
+ 
 
-  let p = [];
-  for(let i = 0; i < 100; i++) {
-    p.push(new Particle(Math.random()*width,Math.random()*height))
-  }
+  // for(let i = 0; i < 100; i++) {
+  //   p.push(new Particle(Math.random()*width,Math.random()*height))
+  // }
   // console.log();
 
   function animate() {
-    // ctx.fillStyle = 'rgba(255,255,255,0.1)'
-    // ctx.fillRect(0,0,canvas.width,canvas.height);
+    if(darkOn === false) {
+      ctx.fillStyle = `rgba(255,255,255,${opacity.value})`;
+      ctx.strokeStyle = 'black';
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+    } else if (darkOn === true) {
+      ctx.fillStyle = `rgba(0,0,0,${opacity.value})`;
+      ctx.strokeStyle = 'white';
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+    }
     // ctx.lineWidth = 2;
     // ctx.lineCap = 'round';
-
+    totals.textContent = `Current Particles: ${p.length}`;
     
     ctx.beginPath();
     

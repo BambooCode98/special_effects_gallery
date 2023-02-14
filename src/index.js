@@ -173,6 +173,7 @@ const MandelbrotSet = new Tile("Mandelbrot Set", 7, "The generation of the Mande
 
 const Snake = new Tile("Snake Game", 8, "The snake game with different controls, easier maneuvering, and 360 degree range of motion. Includes touch support.", "", snakeImg, snake, titleHTML)
 
-const Unknown = new Tile('Dandelion Attractor',9,"I don't know what this is, so I will call it the Dandelion Attractor.","", dandelion, unkown, canvasHTML)
+const Unknown = new Tile('Dandelion Attractor',9,"I don't know what this is, so I will call it the Dandelion Attractor.","", dandelion, unkown, flowHTML2)
 
-const Bubbles = new Tile('Bubbles',10,"Mobile Bubbles","","image",bubbles,canvasHTML)
+// const Bubbles = new Tile('Bubbles',10,"Mobile Bubbles","","image",bubbles,canvasHTML)
+

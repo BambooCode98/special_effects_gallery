@@ -7,18 +7,21 @@ export default function practice1() {
     ctx = canvas.getContext("2d"),
     width = canvas.width = window.innerWidth,
     height = canvas.height = window.innerHeight,
+    menu = document.querySelector('.container'),
     opacity = document.querySelector('.opacity'),
     totals = document.querySelector('.totals'),
     disappear = document.querySelector('.dissipate'),
-    dValue = disappear.value,
+    hide = document.querySelector('.hide'),
     generate = document.querySelector('.generate'),
+    dValue = disappear.value,
     range = 0,
     h = document.querySelector('.hue'),
     s = document.querySelector('.sat'),
     l = document.querySelector('.light'),
     dark = document.querySelector('.night'),
     labels = document.getElementsByTagName('label'),
-    darkOn = false;
+    darkOn = false,
+    hideOn = false;
 
   
   
@@ -50,6 +53,7 @@ export default function practice1() {
       darkOn = true;
       ctx.strokeStyle = 'white';
       totals.style.color = 'white';
+      l.value = 100;
     } else if (darkOn === true) {
       canvas.style.backgroundColor = 'white';
       for(let i=0; i < labels.length; i++) {
@@ -58,14 +62,25 @@ export default function practice1() {
       darkOn = false;
       ctx.strokeStyle = 'black';
       totals.style.color = 'black';
+      l.value = 0;
+    }
+  })
+
+  hide.addEventListener('click', () => {
+    if(hideOn === false) {
+      hideOn = true;
+      menu.style.display = "none";
+    } else if (hideOn = true) {
+      hideOn = false;
+      menu.style.display = "flex";
     }
   })
 
   //the setTimeout functions allow for the dissipation of the particles to appear seamless, does not work with setInterval
   let dis = function () {
-  dValue = disappear.value;
-  points.shift();
-  setTimeout(dis, dValue)
+    dValue = disappear.value;
+    points.shift();
+    setTimeout(dis, dValue)
   }
   setTimeout(dis, dValue)
 
