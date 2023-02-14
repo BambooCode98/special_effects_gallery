@@ -70,9 +70,11 @@ export default function practice1() {
     if(hideOn === false) {
       hideOn = true;
       menu.style.display = "none";
+      hide.textContent = "Open UI";
     } else if (hideOn = true) {
       hideOn = false;
       menu.style.display = "flex";
+      hide.textContent = "Hide UI";
     }
   })
 

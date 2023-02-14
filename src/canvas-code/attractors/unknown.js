@@ -78,9 +78,11 @@ export default function unkown() {
     if(hideOn === false) {
       hideOn = true;
       menu.style.display = "none";
+      hide.textContent = "Hide UI";
     } else if (hideOn = true) {
       hideOn = false;
       menu.style.display = "flex";
+      hide.textContent = "Open UI";
     }
   })
 
