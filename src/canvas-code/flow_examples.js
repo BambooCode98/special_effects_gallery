@@ -57,13 +57,18 @@ export default function practice1() {
 
   //mobile fullscreen
   document.addEventListener('touchstart', (e) => {
-    console.log(e.touches);
     twoTouches.push(e.touches)
     if(twoTouches.length === 2) {
       canvas.requestFullscreen();
-    } else if (twoTouches.length === 4) {
-      document.exitFullscreen();
+      twoTouches = [];
+    }
+  })
 
+  document.addEventListener('touchend', (e) => {
+    twoTouches.push(e.touches)
+    if (twoTouches.length === 2) {
+      document.exitFullscreen();
+      twoTouches = [];
     }
   })
 
