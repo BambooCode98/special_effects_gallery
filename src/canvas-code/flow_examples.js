@@ -21,7 +21,8 @@ export default function practice1() {
     dark = document.querySelector('.night'),
     labels = document.getElementsByTagName('label'),
     darkOn = false,
-    hideOn = false;
+    hideOn = false,
+    twoTouches = [];
 
   
   
@@ -36,6 +37,35 @@ export default function practice1() {
 
   ctx.lineWidth = 0.5;
   let points = [];
+
+
+  window.addEventListener('fullscreenchange', (e) => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  })
+
+
+  //desktop fullscreen
+  document.addEventListener('keydown', (e) => {
+    const key = e.key;
+    if(key === 'f') {
+      canvas.requestFullscreen();
+    } else if(key === 'e') {
+      document.exitFullscreen();
+    }
+  })
+
+  //mobile fullscreen
+  document.addEventListener('touchstart', (e) => {
+    console.log(e.touches);
+    twoTouches.push(e.touches)
+    if(twoTouches.length === 2) {
+      canvas.requestFullscreen();
+    } else if (twoTouches.length === 4) {
+      document.exitFullscreen();
+
+    }
+  })
 
   generate.addEventListener('click', () => {
     ra = Math.random() * 4 - 2;

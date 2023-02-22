@@ -13,7 +13,9 @@ export default function perlinFlow() {
       disappear = document.querySelector('.dissipate'),
       dValue = disappear.value,
       generate = document.querySelector('.generate'),
-      range = 0;
+      range = 0,
+      twoTouches = [];
+
   
   
   // points that will be used to generate a field the lines will move around
@@ -25,6 +27,8 @@ export default function perlinFlow() {
 
   ctx.lineWidth = 0.5;
   let points = [];
+
+  const angleArray = [1,5,50,500,300,33,45,77,234,123,89,5,52,23,78,54,23,576,85,34,67,68,45,45,683,83,6,46,768,45,2,35,326,87,4]
 
   generate.addEventListener('click', () => {
     ra = Math.random() * 4 - 2;
@@ -40,6 +44,34 @@ export default function perlinFlow() {
   setTimeout(dis, dValue)
   }
   setTimeout(dis, dValue)
+
+  window.addEventListener('fullscreenchange', (e) => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  })
+
+
+  //desktop fullscreen
+  document.addEventListener('keydown', (e) => {
+    const key = e.key;
+    if(key === 'f') {
+      canvas.requestFullscreen();
+    } else if(key === 'e') {
+      document.exitFullscreen();
+    }
+  })
+
+  //mobile fullscreen
+  document.addEventListener('touchstart', (e) => {
+    console.log(e.touches);
+    twoTouches.push(e.touches)
+    if(twoTouches.length === 2) {
+      canvas.requestFullscreen();
+    } else if (twoTouches.length === 4) {
+      document.exitFullscreen();
+
+    }
+  })
 
   canvas.addEventListener('touchstart', (e) => {
     e.preventDefault();
@@ -139,10 +171,12 @@ export default function perlinFlow() {
       // let angle = 0;
 
       let angle = noiset(point.x,point.y);
+      let angleChange = angleArray[Math.floor(Math.random()*angleArray.length)] * 0.1;
 
-      rs += angle * Math.random();
-      point.vx += Math.cos(rs) * 0.1;
-      point.vy += Math.sin(rs) * 0.1;
+
+      rs += angle * Math.random() * angleChange;
+      point.vx += Math.cos(rs) * 0.1 * Math.random();
+      point.vy += Math.sin(rs) * 0.1 * Math.random();
   
       point.vx *= 0.97;
       point.vy *= 0.97;

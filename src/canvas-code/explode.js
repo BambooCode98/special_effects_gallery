@@ -7,15 +7,51 @@ export default function explosions() {
   let dValue = 100;
   let boxX = 200;
   let boxY = 200;
-  let [boxW,boxH] = [200,200]
+  let [boxW,boxH] = [200,200];
+  let twoTouches = [];
+  
 
-  ctx.canvas.width = window.innerWidth;
-  ctx.canvas.height = window.innerHeight;
+
+
+  let width = canvas.width = window.innerWidth;
+  let height = canvas.height = window.innerHeight;
   // window.addEventListener('load',() => {
   //   // ctx.shadowBlur = 15;
   //   // ctx.shadowColor = 'lightblue';
     
   // })
+
+  window.addEventListener('fullscreenchange', (e) => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  })
+
+
+  //desktop fullscreen
+  document.addEventListener('keydown', (e) => {
+    const key = e.key;
+    if(key === 'f') {
+      canvas.requestFullscreen();
+    } else if(key === 'e') {
+      document.exitFullscreen();
+    }
+  })
+
+  //mobile fullscreen
+  document.addEventListener('touchstart', (e) => {
+    console.log(e.touches);
+    twoTouches.push(e.touches)
+    if(twoTouches.length === 2) {
+      canvas.requestFullscreen();
+    } else if (twoTouches.length === 4) {
+      document.exitFullscreen();
+
+    }
+  })
+
+
+
+
   if(particleArray.length >= 0) {
     let dis = function () {
       // dValue = disappear.value;
