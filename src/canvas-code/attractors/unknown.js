@@ -62,20 +62,21 @@ export default function unkown() {
 
   //mobile fullscreen
   document.addEventListener('touchstart', (e) => {
-    twoTouches.push(e.touches)
-    if(twoTouches.length === 2) {
+    // console.log(e.targetTouches.length);
+    if (e.targetTouches.length === 2) {
       canvas.requestFullscreen();
-      twoTouches = [];
+    } else if (e.targetTouches.length === 3) {
+      document.exitFullscreen();
     }
   })
 
-  document.addEventListener('touchend', (e) => {
-    twoTouches.push(e.touches)
-    if (twoTouches.length === 2) {
-      document.exitFullscreen();
-      twoTouches = [];
-    }
-  })
+  // document.addEventListener('touchend', (e) => {
+  //   twoTouches.push(e.touches)
+  //   if (twoTouches.length === 2) {
+  //     document.exitFullscreen();
+  //     twoTouches = [];
+  //   }
+  // })
 
   canvas.addEventListener('mousemove', (e) => {
     p.push(new Particle(e.pageX,e.pageY));
