@@ -14,6 +14,7 @@ import mandelSet from './canvas-code/mandlebrotSet';
 import snake from './canvas-code/snakeGame';
 import unkown from './canvas-code/attractors/unknown';
 import bubbles from './canvas-code/bubbles';
+import dla from './canvas-code/biologic/dla';
 
 
 import hero from './images/special_effects_gallery_hero.png';
@@ -177,3 +178,4 @@ const Unknown = new Tile('Dandelion Attractor',9,"I don't know what this is, so 
 
 // const Bubbles = new Tile('Bubbles',10,"Mobile Bubbles","","image",bubbles,canvasHTML)
 
+const DLA = new Tile('Diffuse Limited Aggregation',10,"","","image",dla,canvasHTML)

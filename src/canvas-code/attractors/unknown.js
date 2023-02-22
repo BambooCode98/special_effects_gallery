@@ -40,6 +40,19 @@ export default function unkown() {
       hideOn = false,
       p = [];
 
+  window.addEventListener('fullscreenchange', (e) => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  })
+
+  document.addEventListener('keydown', (e) => {
+    const key = e.key;
+    if(key === 'f') {
+      canvas.requestFullscreen();
+    } else if(key === 'e') {
+      document.exitFullscreen();
+    }
+  })
 
   canvas.addEventListener('mousemove', (e) => {
     p.push(new Particle(e.pageX,e.pageY));
