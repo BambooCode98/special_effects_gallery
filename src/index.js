@@ -27,6 +27,7 @@ import bh from './images/blackhole.png'
 import mandelbrot from './images/MandelbrotSet.png';
 import snakeImg from './images/snakegame.png';
 import dandelion from './images/dandelion_attractor.png';
+import f_spiral from './canvas-code/biologic/fibonacci_spiral';
 
 const root = document.querySelector('#root');
 
@@ -179,3 +180,5 @@ const Unknown = new Tile('Dandelion Attractor',9,"I don't know what this is, so 
 // const Bubbles = new Tile('Bubbles',10,"Mobile Bubbles","","image",bubbles,canvasHTML)
 
 const DLA = new Tile('Diffuse Limited Aggregation',10,"","","image",dla,canvasHTML)
+
+const Fibonacci = new Tile('Fibonacci Spiral', 11,"","","",f_spiral,canvasHTML)
