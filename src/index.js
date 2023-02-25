@@ -15,6 +15,7 @@ import snake from './canvas-code/snakeGame';
 import unkown from './canvas-code/attractors/unknown';
 import bubbles from './canvas-code/bubbles';
 import dla from './canvas-code/biologic/dla';
+import f_spiral from './canvas-code/biologic/fibonacci_spiral';
 
 
 import hero from './images/special_effects_gallery_hero.png';
@@ -27,7 +28,7 @@ import bh from './images/blackhole.png'
 import mandelbrot from './images/MandelbrotSet.png';
 import snakeImg from './images/snakegame.png';
 import dandelion from './images/dandelion_attractor.png';
-import f_spiral from './canvas-code/biologic/fibonacci_spiral';
+import fibo_spiral_img from './images/Fibo_Spiral.png';
 
 const root = document.querySelector('#root');
 
@@ -181,4 +182,4 @@ const Unknown = new Tile('Dandelion Attractor',9,"I don't know what this is, so 
 
 const DLA = new Tile('Diffuse Limited Aggregation',10,"","","image",dla,canvasHTML)
 
-const Fibonacci = new Tile('Fibonacci Spiral', 11,"","","",f_spiral,flowHTML2)
+const Fibonacci = new Tile('Fibonacci Spiral', 11,"A program that creates the logarithmic spiral, aka the Fibonacci Spiral. Users can draw over the screen to create numerous spirals.","",fibo_spiral_img,f_spiral,flowHTML2)

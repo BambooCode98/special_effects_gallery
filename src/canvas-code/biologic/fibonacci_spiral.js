@@ -70,13 +70,25 @@ export default function f_spiral() {
     }
   })
 
-  document.addEventListener('mousemove', (e) => {
+  // document.addEventListener('mousemove', (e) => {
+  //   mx = e.pageX;
+  //   my = e.pageY;
+  //   parts.push(new Particle(mx,my));
+  // })
+
+  document.addEventListener('mousedown', (e) => {
     mx = e.pageX;
     my = e.pageY;
     parts.push(new Particle(mx,my));
   })
 
   document.addEventListener('touchmove', (e) => {
+    mx = e.touches[0].clientX;
+    my = e.touches[0].clientY;
+    parts.push(new Particle(mx,my));
+  })
+
+  document.addEventListener('touchstart', (e) => {
     mx = e.touches[0].clientX;
     my = e.touches[0].clientY;
     parts.push(new Particle(mx,my));
