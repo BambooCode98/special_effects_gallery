@@ -17,7 +17,8 @@ export default function f_spiral() {
       y = height/2,
       mx = 0.01,
       my = 0.01,
-      parts = [];
+      parts = [],
+      dValue = 1000;
 
 
   // function get_fibonacci_numbers(a,b) {
@@ -28,10 +29,29 @@ export default function f_spiral() {
   //   }
   //   get_fibonacci_numbers(a,b)
   // }
-
-
-  
   // get_fibonacci_numbers(a,b)
+
+  document.addEventListener('mousemove', (e) => {
+    mx = e.pageX;
+    my = e.pageY;
+    parts.push(new Particle(mx,my));
+  })
+
+  document.addEventListener('touchmove', (e) => {
+    mx = e.touches[0].clientX;
+    my = e.touches[0].clientY;
+    parts.push(new Particle(mx,my));
+  })
+  
+  if(parts.length >= 0) {
+    let dis = function () {
+      // dValue = 100;
+      // dValue = disappear.value;
+      parts.shift();
+      setTimeout(dis, dValue)
+    }
+    setTimeout(dis, dValue)
+  }
 
   let sides = 1;
 
@@ -92,11 +112,7 @@ export default function f_spiral() {
   //   }
   // })
 
-  document.addEventListener('mousemove', (e) => {
-    mx = e.pageX;
-    my = e.pageY;
-    parts.push(new Particle(mx,my));
-  })
+
 
 
   function animate() {
