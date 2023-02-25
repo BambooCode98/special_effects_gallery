@@ -181,4 +181,4 @@ const Unknown = new Tile('Dandelion Attractor',9,"I don't know what this is, so 
 
 const DLA = new Tile('Diffuse Limited Aggregation',10,"","","image",dla,canvasHTML)
 
-const Fibonacci = new Tile('Fibonacci Spiral', 11,"","","",f_spiral,canvasHTML)
+const Fibonacci = new Tile('Fibonacci Spiral', 11,"","","",f_spiral,flowHTML2)

@@ -62,21 +62,12 @@ export default function unkown() {
 
   //mobile fullscreen
   document.addEventListener('touchstart', (e) => {
-    // console.log(e.targetTouches.length);
     if (e.targetTouches.length === 2) {
       canvas.requestFullscreen();
     } else if (e.targetTouches.length === 3) {
       document.exitFullscreen();
     }
   })
-
-  // document.addEventListener('touchend', (e) => {
-  //   twoTouches.push(e.touches)
-  //   if (twoTouches.length === 2) {
-  //     document.exitFullscreen();
-  //     twoTouches = [];
-  //   }
-  // })
 
   canvas.addEventListener('mousemove', (e) => {
     p.push(new Particle(e.pageX,e.pageY));
@@ -89,6 +80,7 @@ export default function unkown() {
     p.push(new Particle(e.touches[0].clientX,e.touches[0].clientY))
   })
 
+  //dark mode
   dark.addEventListener('click', () => {
     if(darkOn === false) {
       canvas.style.backgroundColor = 'black';
@@ -111,6 +103,7 @@ export default function unkown() {
     }
   })
 
+  //hide the menu
   hide.addEventListener('click', () => {
     if(hideOn === false) {
       hideOn = true;
@@ -123,10 +116,6 @@ export default function unkown() {
     }
   })
 
-
-
-
-
   if(p.length >= 0) {
     let dis = function () {
       dValue = disappear.value;
@@ -135,7 +124,6 @@ export default function unkown() {
     }
     setTimeout(dis, dValue)
   }
-
 
 
   class Particle{

@@ -5,6 +5,20 @@ export default function f_spiral() {
       ctx = canvas.getContext('2d'),
       width = canvas.width = window.innerWidth,
       height = canvas.height = window.innerHeight,
+      h = document.querySelector('.hue'),
+      s = document.querySelector('.sat'),
+      l = document.querySelector('.light'),
+      dark = document.querySelector('.night'),
+      labels = document.getElementsByTagName('label'),
+      darkOn = false,
+      hideOn = false,
+      menu = document.querySelector('.container'),
+      opacity = document.querySelector('.opacity'),
+      totals = document.querySelector('.totals'),
+      disappear = document.querySelector('.dissipate'),
+      generate = document.querySelector('.generate'),
+      hide = document.querySelector('.hide'),
+      dValue = disappear.value,
       angle = 0,
       a = 0,
       b = 1,
@@ -17,8 +31,7 @@ export default function f_spiral() {
       y = height/2,
       mx = 0.01,
       my = 0.01,
-      parts = [],
-      dValue = 1000;
+      parts = [];
 
 
   // function get_fibonacci_numbers(a,b) {
@@ -31,6 +44,32 @@ export default function f_spiral() {
   // }
   // get_fibonacci_numbers(a,b)
 
+  window.addEventListener('fullscreenchange', (e) => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  })
+
+
+  //desktop fullscreen
+  document.addEventListener('keydown', (e) => {
+    const key = e.key;
+    if(key === 'f') {
+      canvas.requestFullscreen();
+    } else if(key === 'e') {
+      document.exitFullscreen();
+    }
+  })
+
+  //mobile fullscreen
+  document.addEventListener('touchstart', (e) => {
+    // console.log(e.targetTouches.length);
+    if (e.targetTouches.length === 2) {
+      canvas.requestFullscreen();
+    } else if (e.targetTouches.length === 3) {
+      document.exitFullscreen();
+    }
+  })
+
   document.addEventListener('mousemove', (e) => {
     mx = e.pageX;
     my = e.pageY;
@@ -42,18 +81,53 @@ export default function f_spiral() {
     my = e.touches[0].clientY;
     parts.push(new Particle(mx,my));
   })
+
+  //dark mode
+  dark.addEventListener('click', () => {
+    if(darkOn === false) {
+      canvas.style.backgroundColor = 'black';
+      for(let i=0; i < labels.length; i++) {
+        labels[i].style.color = 'white';
+      }
+      darkOn = true;
+      ctx.strokeStyle = 'white';
+      totals.style.color = 'white';
+      l.value = 100;
+    } else if (darkOn === true) {
+      canvas.style.backgroundColor = 'white';
+      for(let i=0; i < labels.length; i++) {
+        labels[i].style.color = 'black';
+      }
+      darkOn = false;
+      ctx.strokeStyle = 'black';
+      totals.style.color = 'black';
+      l.value = 0;
+    }
+  })
+
+  //hide the menu
+  hide.addEventListener('click', () => {
+    if(hideOn === false) {
+      hideOn = true;
+      menu.style.display = "none";
+      hide.textContent = "Open UI";
+    } else if (hideOn = true) {
+      hideOn = false;
+      menu.style.display = "flex";
+      hide.textContent = "Hide UI";
+    }
+  })
   
+  //set the particle disappearance rate
   if(parts.length >= 0) {
     let dis = function () {
-      // dValue = 100;
-      // dValue = disappear.value;
+      dValue = disappear.value;
       parts.shift();
       setTimeout(dis, dValue)
     }
     setTimeout(dis, dValue)
   }
 
-  let sides = 1;
 
   class Particle{
     constructor(x,y) {
@@ -67,14 +141,11 @@ export default function f_spiral() {
     }
 
     update() {
-      // d += 1;
-      // //increasing the sides variable causes a spiral motion
-      // sides += (0.09)
-      // //multiply pi by sides for a double loop
-      // //divide pi by sides for fibonacci spiral/logarithmic spiral
-      // angle += Math.PI/sides;
-      // dx = d*Math.cos(angle);
-      // dy = d*Math.sin(angle);
+      ctx.strokeStyle = `hsl(${h.value},${s.value}%,${l.value}%)`
+
+      //increasing the sides variable causes a spiral motion
+      //multiply pi by sides for a double loop
+      //divide pi by sides for fibonacci spiral/logarithmic spiral
       this.r += 1;
       this.sides += 0.05;
       this.theta += Math.PI/this.sides;
@@ -116,11 +187,21 @@ export default function f_spiral() {
 
 
   function animate() {
-    ctx.fillStyle = `rgba(255,255,255,${0.09})`;
-    ctx.strokeStyle = 'black';
-    ctx.fillRect(0,0,canvas.width,canvas.height)
-    // ctx.lineWidth = 5;
-    // ctx.lineCap = 'round';
+    if(darkOn === false) {
+      ctx.fillStyle = `rgba(255,255,255,${opacity.value})`;
+      ctx.strokeStyle = 'black';
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+    } else if (darkOn === true) {
+      // console.log(ctx.fillStyle);
+      // ctx.fillStyle = `rgba(0,0,0,${0.9})`;
+      // console.log(ctx.fillStyle);
+      ctx.fillStyle = `rgba(0,0,0,${opacity.value})`;
+      // opacity.value = 0.01;
+      // console.log(ctx.fillStyle);
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+      ctx.strokeStyle = 'white';
+    }
+    totals.textContent = `Current Particles: ${parts.length}`;
 
     ctx.beginPath();
 
@@ -128,33 +209,8 @@ export default function f_spiral() {
       part.update();
       part.draw();
     })
-    
-    // ctx.moveTo(x,y);
-
-    // d += 1;
-    //increasing the sides variable causes a spiral motion
-    // sides += (0.09)
-    //multiply pi by sides for a double loop
-    //divide pi by sides for fibonacci spiral/logarithmic spiral
-    // angle += Math.PI/sides;
-    // dx = d*Math.cos(angle);
-    // dy = d*Math.sin(angle);
-
-    // x += dx*0.01;
-    // y += dy*0.01;
-
-
-    // x *= 0.97
-    // y *= 0.97
-
-    // ctx.lineTo(x,y);
 
     ctx.stroke();
-
-    if(x > width) x = 0;
-    if(y > height) y = 0;
-    if(y < 0) y = height;
-    if(x < 0) x = width;
     
 
     requestAnimationFrame(animate)
