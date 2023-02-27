@@ -83,12 +83,14 @@ export default function f_spiral() {
   })
 
   document.addEventListener('touchmove', (e) => {
+    e.preventDefault();
     mx = e.touches[0].clientX;
     my = e.touches[0].clientY;
     parts.push(new Particle(mx,my));
   })
 
   document.addEventListener('touchstart', (e) => {
+    e.preventDefault();
     mx = e.touches[0].clientX;
     my = e.touches[0].clientY;
     parts.push(new Particle(mx,my));
