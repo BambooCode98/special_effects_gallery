@@ -16,6 +16,7 @@ import unkown from './canvas-code/attractors/unknown';
 import bubbles from './canvas-code/bubbles';
 import dla from './canvas-code/biologic/dla';
 import f_spiral from './canvas-code/biologic/fibonacci_spiral';
+import rossler from './canvas-code/attractors/rossler';
 
 
 import hero from './images/special_effects_gallery_hero.png';
@@ -180,6 +181,16 @@ const Unknown = new Tile('Dandelion Attractor',9,"I don't know what this is, so 
 
 // const Bubbles = new Tile('Bubbles',10,"Mobile Bubbles","","image",bubbles,canvasHTML)
 
-const DLA = new Tile('Diffuse Limited Aggregation',10,"","","image",dla,canvasHTML)
+// const DLA = new Tile('Diffuse Limited Aggregation',10,"","","image",dla,canvasHTML)
 
 const Fibonacci = new Tile('Fibonacci Spiral', 11,"A program that creates the logarithmic spiral, aka the Fibonacci Spiral. Users can draw over the screen to create numerous spirals.","",fibo_spiral_img,f_spiral,flowHTML2)
+
+const Rossler = new Tile(
+  'Rossler Attractor',
+  12,
+  "The rossler attractor",
+  "",
+  null,
+  rossler,
+  flowHTML2
+)

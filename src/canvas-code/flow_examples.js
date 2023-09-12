@@ -13,7 +13,20 @@ export default function practice1() {
     disappear = document.querySelector('.dissipate'),
     hide = document.querySelector('.hide'),
     generate = document.querySelector('.generate'),
+    checkHue = document.querySelector('.checkboxh'),
+    checkSat = document.querySelector('.checkboxs'),
+    checkLight = document.querySelector('.checkboxl'),
+    getLineWidth = document.querySelector('.width'),
+    testBox = document.querySelector('.testBox'),
     dValue = disappear.value,
+    changeHue = false,
+    changeSat = false,
+    changeLight = false,
+    decl = false,
+    decs = false,
+    changingHue = 0,
+    changingSat = 0,
+    changingLight = 0,
     range = 0,
     h = document.querySelector('.hue'),
     s = document.querySelector('.sat'),
@@ -72,7 +85,7 @@ export default function practice1() {
     rd = Math.random() * 4 - 2;
   })
 
-  dark.addEventListener('click', () => {
+  dark.addEventListener('click', (e) => {
     if(darkOn === false) {
       canvas.style.backgroundColor = 'black';
       for(let i=0; i < labels.length; i++) {
@@ -91,6 +104,7 @@ export default function practice1() {
       ctx.strokeStyle = 'black';
       totals.style.color = 'black';
       l.value = 0;
+      opacity.value = 0.1;
     }
   })
 
@@ -106,6 +120,23 @@ export default function practice1() {
     }
   })
 
+  checkHue.addEventListener("click", e => {
+    changeHue = e.target.checked;
+    l.value = 50;
+    s.value = 50;
+  })
+
+  checkSat.addEventListener("click", e => {
+    changeSat = e.target.checked;
+    l.value = 50;
+    s.value = 50;
+  })
+
+  checkLight.addEventListener("click", e => {
+    changeLight = e.target.checked;
+    l.value = 50;
+    s.value = 50;
+  })
   //the setTimeout functions allow for the dissipation of the particles to appear seamless, does not work with setInterval
   if(points.length >= 0) {
     let dis = function () {
@@ -200,7 +231,55 @@ export default function practice1() {
     }
   }
 
+  // ctx.globalCompositeOperation = "destination-out";
+  // ctx.fillStyle = 'rgb(255,255,255)'
+  // ctx.fillRect(0,0,canvas.width,canvas.height);
+  // ctx.lineCap = "round";
+
+  let lastCall;
+  let frames;
+  let delta;
+
   function animate() {
+
+    if(lastCall !== lastCall) {
+      lastCall = performance.now();
+      frames=0;
+      return;
+    }
+    if(changeHue) {
+      changingHue+=1;
+    }
+
+    if(changeSat) {
+      if(changingSat >= 100) decs = true;
+      if(changingSat <= 0) decs = false;
+
+      if(!decs) {
+        changingSat+=0.1;
+      } else {
+        changingSat-=0.1;
+      }
+
+    }
+    
+    if(changeLight) {
+      if(changingLight >=100) {
+        decl = true;
+      }
+
+      if(changingLight <= 0) decl = false;
+      // if(dec) {
+      //   changingLight-=0.1;
+      // }
+      // console.log(dec, changingLight);
+      if(!decl) {
+        changingLight+=0.1;
+      } else {
+        changingLight-=0.1;
+      }
+    }
+
     if(darkOn === false) {
       ctx.fillStyle = `rgba(255,255,255,${opacity.value})`;
       ctx.strokeStyle = 'black';
@@ -208,15 +287,41 @@ export default function practice1() {
     } else if (darkOn === true) {
       ctx.fillStyle = `rgba(0,0,0,${opacity.value})`;
       ctx.strokeStyle = 'white';
+      // ctx.globalCompositeOperation = "destination-out"
       ctx.fillRect(0,0,canvas.width,canvas.height);
     }
     totals.textContent = `Current Particles: ${points.length}`;
+    ctx.lineWidth = getLineWidth.value;
+
+    // let h2 = changeHue ? changingHue : h.value;
+    // let s2 = changeSat ? changingSat : s.value;
+    // let l2 = changeLight ? changingLight : l.value;
+    let h2, s2, l2;
+
+    if(changeHue === true) {
+      h2 = changingHue;
+    } else {
+      h2 = h.value;
+    }
+
+    if(changeSat === true) {
+      s2 = changingSat;
+    } else {
+      s2 = s.value;
+    }
+
+    if(changeLight === true) {
+      l2 = changingLight;
+    } else {
+      l2 = l.value;
+    }
+    ctx.strokeStyle = `hsl(${h2},${s2}%,${l2}%)`
+
+
     
     points.forEach(point => {
       
-      let h2 = h.value;
-      let s2 = s.value;
-      let l2 = l.value;
+      // let glw = getLineWidth;
       
       let angle = noiset(point.x,point.y);
       
@@ -231,7 +336,6 @@ export default function practice1() {
       ctx.beginPath();
       ctx.moveTo(point.x,point.y);
       // console.log(h);
-      ctx.strokeStyle = `hsl(${h2},${s2}%,${l2}%)`
       
       point.x += point.vx;
       point.y += point.vy;
@@ -247,6 +351,10 @@ export default function practice1() {
 
     })
 
+    delta = (performance.now() - lastCall)/1000;
+    lastCall = performance.now();
+    frames = 1/delta;
+    testBox.textContent = Math.round(frames);
     requestAnimationFrame(animate)
   }
 

@@ -196,7 +196,8 @@ export default function unkown() {
     
     // theta+=0.03
     
-    //these are attractors/repellors
+    // these are attractors/repellors
+    // edit the width/height to zoom in and out
     a = (width)*0.01;
     b = (height)*0.01;
     c = 2500*0.01;
