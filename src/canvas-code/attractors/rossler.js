@@ -370,11 +370,27 @@ export default function rossler() {
       
       ctx.moveTo(point.x,point.y);
       // console.log(point.x, point.y, "old");
-      let ang = Math.atan2(newY+point.y,newX+point.x)
-      // console.log(ang,"angle");
-      point.x += ang;
-      point.y += ang;
+      function rotate(cx, cy, x, y, angle) {
+      var radians = (Math.PI / 180) * angle,
+          cos = Math.cos(radians),
+          sin = Math.sin(radians),
+          nx = (cos * (x - cx)) + (sin * (y - cy)) + cx,
+          ny = (cos * (y - cy)) - (sin * (x - cx)) + cy;
+      return [nx, ny];
+      }
+      // console.log(rotate(120,120,width/2,height/2,250)[0], "rotate function here")
+      // posx=rotate(width/2,height/2,posx,posy,Math.atan2(dx,dy))[0];
+      // posy=rotate(width/2,height/2,posx,posy,Math.atan2(dx,dy))[1];
+      point.x=rotate(width/2,height/2-500,point.x,point.y,Math.atan2(point.x,x))[0]*0.97;
+      point.y=rotate(width/2,height/2-500,point.x,point.y,Math.atan2(point.y,y))[1]*0.97;
       
+      /*  keep this setup below: it puts a cyclone in the midddle of the screen */
+      // point.x=rotate(width/2+750,height/2-500,point.x,point.y,Math.atan2(point.x,x))[0]*0.97;
+      // point.y=rotate(width/2+750,height/2-500,point.x,point.y,Math.atan2(point.y,y))[1]*0.97;
+
+
+
+
       // console.log(point.x, point.y, "new");
       ctx.lineTo(point.x,point.y);
       
@@ -391,73 +407,103 @@ export default function rossler() {
     })
     ctx.stroke();
 
-    delta = (performance.now() - lastCall)/1000;
-    lastCall = performance.now();
-    frames = 1/delta;
-    testBox.textContent = Math.round(frames);
+    // check fps 
+    // delta = (performance.now() - lastCall)/1000;
+    // lastCall = performance.now();
+    // frames = 1/delta;
+    // testBox.textContent = Math.round(frames);
     requestAnimationFrame(animate)
   }
 
-  let pos1 = 150;
-  let pos2 = 150;
-
+  let posx = 250;
+  let posy = 150;
+  let dirX = 0;
+  let dirY = 0;
+  let angMV = 0;
   // x = pos1;
   // y = pos2;
 
-  function Rupdate() {
-    const dx = -y - z;
-    const dy = x + a * y;
-    const dz = b + x * z - c * z;
+  // function Rupdate() {
+  //   const dx = -y - z;
+  //   const dy = x + a * y;
+  //   const dz = b + x * z - c * z;
 
-    x += dx * dt;
-    y += dy * dt;
-    z += dz * dt;
-    // console.log(x,y);
-    // Map x and y to canvas coordinates
-    const newX = canvas.width / 2 + x * scale * 2;
-    const newY = canvas.height / 2 + y * scale * 2;
-    const pX = width/2+x*scale*2;
-    const pY = height/2+y*scale*2;
-    // console.log(pX,py, "der eqs fr/om rupdate");
-    // Draw a line to the new point
-    ctx.beginPath();
-    ctx.moveTo(canvasX, canvasY);
-    console.log(canvasX,canvasY,newX,newY, "all - cx,cy,nx,ny");
-    console.log(Math.atan2(canvasX,newX));
-    console.log(Math.atan2(canvasY,newY));
-    ctx.lineTo(newX, newY);
-    ctx.stroke();
+  //   x += dx * dt;
+  //   y += dy * dt;
+  //   z += dz * dt;
+  //   // console.log(x,y);
+  //   // Map x and y to canvas coordinates
+  //   const newX = canvas.width / 2 + x * scale * 2;
+  //   const newY = canvas.height / 2 + y * scale * 2;
+  //   // const pX = width/2+x*scale*2;
+  //   // const pY = height/2+y*scale*2;
+  //   // console.log(pX,py, "der eqs fr/om rupdate");
+  //   // Draw a line to the new point
+  //   // ctx.beginPath();
+  //   // ctx.moveTo(canvasX, canvasY);
+  //   // // console.log(canvasX,canvasY,newX,newY, "all - cx,cy,nx,ny");
+  //   // // console.log(Math.atan2(canvasX,newX));
+  //   // // console.log(x,y, "x/y from middle")
+  //   // console.log("angle: ---->", Math.atan2(dy,dx))
+  //   // // console.log(Math.atan2(canvasY,newY));
+  //   // ctx.lineTo(newX, newY);
+  //   // ctx.stroke();
 
+  //   let nx=x;
+  //   let ny=y;
 
-    let ang = Math.atan2(x,y);
-    if(ang<0) {
-      ang=0;
-    }
-
-    ctx.beginPath();
-    console.log(pos1,pos2, "pos init");
-    ctx.moveTo(pos1, pos2);
-    // console.log(ang,pX,pY);
-
-    pos1 += Math.atan2(canvasX,newX);
-    pos2 += Math.atan2(canvasY,newY);
-    // console.log(ang);
+  //   // let dis = Math.sqrt((width/2-posx)**2+(height/2-posy)**2)
+  //   // console.log(dis, "diiiiiiiiiiissssssssss")
+  //   // dirY = Math.sin(angMV)-y;
+  //   ctx.save()
+  //   ctx.strokeStyle="green"
+  //   ctx.beginPath();
+  //   console.log(posx,posy, "pos init");
+  //   ctx.moveTo(posx,posy);
+  //   // console.log(nx,ny,"x,y");
     
-    console.log(pos1,pos2, "pos change");
-    ctx.lineTo(pos1, pos2);
-    ctx.stroke();
-    // console.log(newX, newY, "der eqs fr/om rupdate 2");
-    // Update the current canvas position
-    canvasX = newX;
-    canvasY = newY;
-    // pos1 = pX;
-    // pos2 = py;
+  //   // posx=width/2+x*scale*2;
+  //   // posy=height/2+y*scale*2;
+  //   function rotate(cx, cy, x, y, angle) {
+  //   var radians = (Math.PI / 180) * angle,
+  //       cos = Math.cos(radians),
+  //       sin = Math.sin(radians),
+  //       nx = (cos * (x - cx)) + (sin * (y - cy)) + cx,
+  //       ny = (cos * (y - cy)) - (sin * (x - cx)) + cy;
+  //   return [nx, ny];
+  //   }
+  //   // console.log(rotate(120,120,width/2,height/2,250)[0], "rotate function here")
+  //   // posx=rotate(width/2,height/2,posx,posy,Math.atan2(dx,dy))[0];
+  //   // posy=rotate(width/2,height/2,posx,posy,Math.atan2(dx,dy))[1];
+  //   posx=rotate(width/2,height/2,posx,posy,Math.atan2(posx,dx))[0];
+  //   posy=rotate(width/2,height/2,posx,posy,Math.atan2(posy,dy))[1];
+  //   // console.log(x,y, "x/y from outer")
 
-    // Request the next frame
-    requestAnimationFrame(Rupdate);
-  }
+  //   // // console.log(ang);
+  //   // canvasX+=15;
+    
+  //   console.log(posx,posy, "pos change");
+  //   ctx.lineTo(posx,posy);
+  //   ctx.stroke();
+  //   ctx.restore()
+  //   // console.log(newX, newY, "der eqs fr/om rupdate 2");
+  //   // Update the current canvas position
+  //   // posx=nx;
+  //   // posy=ny;
+  //   canvasX = newX;
+  //   canvasY = newY;
+  //   // pos1 = pX;
+  //   // pos2 = py;
+  //   if(posx < 0) posx = width;
+  //   if(posy < 0) posy = height;
+  //   if(posx > width) posx = 0;
+  //   if(posy > height) posy = 0;
 
-  Rupdate();
+  //   // Request the next frame
+  //   requestAnimationFrame(Rupdate);
+  // }
+
+  // Rupdate();
   
   
   animate()
